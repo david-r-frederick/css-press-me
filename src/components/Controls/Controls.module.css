@@ -1,0 +1,52 @@
+.rowHolder {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.subtitles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 11.25rem;
+  margin-right: 2%;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 11.25rem;
+}
+
+.buttonHolder {
+  display: flex;
+}
+
+.propertyTitle {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.propertyControl {
+  background-color: purple;
+  color: white;
+  margin-left: .1rem;
+  padding: .75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.propertyControl:hover,
+.propertyControl:focus {
+  opacity: 0.85;
+  outline: none;
+}

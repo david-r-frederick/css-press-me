@@ -1,0 +1,19 @@
+.navbarContainer {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background-image: linear-gradient(red, purple);
+}
+
+.title {
+  color: white;
+  margin-left: 15px;
+  font-weight: 200;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 2.2rem;
+  text-decoration: none;
+}
