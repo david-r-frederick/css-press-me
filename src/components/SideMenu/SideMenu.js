@@ -12,13 +12,8 @@ const SideMenu = (props) => {
                     </Link>
                 </li>
                 <li className={classes.SideMenuItem}>
-                    <Link className={classes.SideMenuItemLink} to="/main/display">
-                        Display
-                    </Link>
-                </li>
-                <li className={classes.SideMenuItem}>
-                    <Link className={classes.SideMenuItemLink} to="/main/opacity">
-                        Opacity
+                    <Link className={classes.SideMenuItemLink} to="/main/visibility">
+                        Visibility
                     </Link>
                 </li>
                 <li className={classes.SideMenuItem}>

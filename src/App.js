@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './containers/NavBar/NavBar';
 import SideMenu from './components/SideMenu/SideMenu';
-import { FlexBox, Display, Opacity, Animation, Transition } from './containers/Pages';
+import { FlexBox, Visibility, Animation, Transition } from './containers/Pages';
 import { Link, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 
@@ -22,8 +22,7 @@ const MainFlow = ({ match }) => {
                 <div className="y-spacer"></div>
                 <div className="bodyContainer">
                     <Route component={FlexBox} path={match.url + "/flexbox"} />
-                    <Route component={Display} path={match.url + "/display"} />
-                    <Route component={Opacity} path={match.url + "/opacity"} />
+                    <Route component={Visibility} path={match.url + "/visibility"} />
                     <Route component={Animation} path={match.url + "/animation"} />
                     <Route component={Transition} path={match.url + "/transition"} />
                 </div>

@@ -80,7 +80,7 @@ export class FlexBox extends Component {
 
     render() {
         return (
-            <div className={classes.FlexBoxContainer}>
+            <div className={classes.flexBoxContainer}>
                 <h2 className={classes.controlTitle}>FlexBox</h2>
                 <Controls
                     data={[

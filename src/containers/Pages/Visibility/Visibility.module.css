@@ -1,19 +1,23 @@
-.flexBoxContainer {
-  width: 100%;
-}
-
 .block {
+  text-align: center;
   background-color: black;
   color: white;
-  text-align: center;
   font-size: 2.8rem;
+  min-width: fit-content;
   width: 4rem;
   height: 4rem;
   margin: 0.5rem;
   border-radius: 5px;
+  padding: 1rem;
+  display: inline-block;
 }
 
 .controlTitle {
   font-size: 2rem;
   font-weight: 400;
+  text-align: center;
 }
+
+/* .opacityContainer {
+
+} */
