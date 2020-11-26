@@ -1,1 +1,29 @@
+.playground {
+  display: flex;
+}
 
+.base {
+  display: flex;
+  justify-content: center;
+  width: 83%;
+  height: 100vh;
+  margin-top: 60px;
+}
+
+.x-spacer {
+  width: 16.7rem;
+  min-width: 16.7rem;
+  height: 100vh;
+}
+
+.bodyContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2rem;
+  padding-top: 0;
+}
+
+h2 {
+  text-align: center;
+}

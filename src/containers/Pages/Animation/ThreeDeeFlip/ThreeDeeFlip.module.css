@@ -1,0 +1,77 @@
+.card {
+    width: 700px;
+    height: 400px;
+    margin: 2rem auto;
+}
+
+.card:hover .card__content {
+    transform: rotateY(180deg);
+}
+
+.card__content {
+    text-align: center;
+    position: relative;
+    transition: transform 2000ms ease-in;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.card__front,
+.card__back {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__front {
+    background-image: url(../../../../assets/images/batman.jpeg);
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+.card__front::before {
+    content: '';
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    left: 5%;
+    top: 5%;
+    border: 3px solid black;
+    transform: translateZ(100px);
+}
+
+.card__back {
+    transform: rotateY(180deg);
+    background: black;
+    padding: 2rem;
+}
+
+.card__title {
+    transform: translateZ(200px);
+    color: rgb(255, 0, 0);
+    font-size: 2.5rem;
+}
+
+.card__subtitle {
+    transform: translateZ(150px);
+    color: rgb(150, 0, 0);
+    font-size: 1rem;
+}
+
+.card__body {
+    transform: translateZ(200px);
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
+    
+}

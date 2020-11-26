@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './FlexBox.module.css';
 import Controls from '../../../components/Controls/Controls';
 import PlayBox from '../../../components/PlayBox/PlayBox';
+import { generateControl } from '../../../ctrlFactory';
 
 export class FlexBox extends Component {
     constructor(props) {
@@ -81,134 +82,81 @@ export class FlexBox extends Component {
     render() {
         return (
             <div className={classes.flexBoxContainer}>
-                <h2 className={classes.controlTitle}>FlexBox</h2>
-                <Controls
-                    data={[
-                        {
-                            subtitle: 'Flex-Direction Properties',
-                            buttons: [
-                                {
-                                    title: 'Row',
-                                    ref: this.flexRowBtnRef,
-                                    onClick: () => {
+                <div>
+                    <h2 className={classes.controlTitle}>FlexBox</h2>
+                    <Controls
+                        data={[
+                            {
+                                subtitle: 'Flex-Direction Properties',
+                                buttons: [
+                                    generateControl('Row', this.flexRowBtnRef, () => {
                                         this.changeFlexContainerProperty('flex-direction', 'row');
                                         this.handleActiveButtons('direction', this.flexRowBtnRef);
-                                    },
-                                },
-                                {
-                                    title: 'Row-Reverse',
-                                    ref: this.flexRowReverseBtnRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Row-Reverse', this.flexRowReverseBtnRef, () => {
                                         this.changeFlexContainerProperty('flex-direction', 'row-reverse');
                                         this.handleActiveButtons('direction', this.flexRowReverseBtnRef);
-                                    },
-                                },
-                                {
-                                    title: 'Column',
-                                    ref: this.flexColumnBtnRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Column', this.flexColumnBtnRef, () => {
                                         this.changeFlexContainerProperty('flex-direction', 'column');
                                         this.handleActiveButtons('direction', this.flexColumnBtnRef);
-                                    },
-                                },
-                                {
-                                    title: 'Column-Reverse',
-                                    ref: this.flexColumnReverseBtnRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Column-Reverse', this.flexColumnReverseBtnRef, () => {
                                         this.changeFlexContainerProperty('flex-direction', 'column-reverse');
                                         this.handleActiveButtons('direction', this.flexColumnReverseBtnRef);
-                                    },
-                                },
-                            ],
-                        },
-                        {
-                            subtitle: 'Align-Items Properties',
-                            buttons: [
-                                {
-                                    title: 'Flex-Start',
-                                    ref: this.alignItemsStartRef,
-                                    onClick: () => {
+                                    }),
+                                ],
+                            },
+                            {
+                                subtitle: 'Align-Items Properties',
+                                buttons: [
+                                    generateControl('Flex-Start', this.alignItemsStartRef, () => {
                                         this.changeFlexContainerProperty('align-items', 'flex-start');
                                         this.handleActiveButtons('alignment', this.alignItemsStartRef);
-                                    },
-                                },
-                                {
-                                    title: 'Center',
-                                    ref: this.alignItemsCenterRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Center', this.alignItemsCenterRef, () => {
                                         this.changeFlexContainerProperty('align-items', 'center');
                                         this.handleActiveButtons('alignment', this.alignItemsCenterRef);
-                                    },
-                                },
-                                {
-                                    title: 'Flex-End',
-                                    ref: this.alignItemsEndRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Flex-End', this.alignItemsEndRef, () => {
                                         this.changeFlexContainerProperty('align-items', 'flex-end');
                                         this.handleActiveButtons('alignment', this.alignItemsEndRef);
-                                    },
-                                },
-                            ],
-                        },
-                        {
-                            subtitle: 'Justify-Content Properties',
-                            buttons: [
-                                {
-                                    title: 'Flex-Start',
-                                    ref: this.justifyContentStartRef,
-                                    onClick: () => {
+                                    }),
+                                ],
+                            },
+                            {
+                                subtitle: 'Justify-Content Properties',
+                                buttons: [
+                                    generateControl('Flex-Start', this.justifyContentStartRef, () => {
                                         this.changeFlexContainerProperty('justify-content', 'flex-start');
                                         this.handleActiveButtons('justify', this.justifyContentStartRef);
-                                    },
-                                },
-                                {
-                                    title: 'Center',
-                                    ref: this.justifyContentCenterRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Center', this.justifyContentCenterRef, () => {
                                         this.changeFlexContainerProperty('justify-content', 'center');
                                         this.handleActiveButtons('justify', this.justifyContentCenterRef);
-                                    },
-                                },
-                                {
-                                    title: 'Flex-End',
-                                    ref: this.justifyContentEndRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Flex-End', this.justifyContentEndRef, () => {
                                         this.changeFlexContainerProperty('justify-content', 'flex-end');
                                         this.handleActiveButtons('justify', this.justifyContentEndRef);
-                                    },
-                                },
-                                {
-                                    title: 'Space-Around',
-                                    ref: this.justifyContentAroundRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Space-Around', this.justifyContentAroundRef, () => {
                                         this.changeFlexContainerProperty('justify-content', 'space-around');
                                         this.handleActiveButtons('justify', this.justifyContentAroundRef);
-                                    },
-                                },
-                                {
-                                    title: 'Space-Between',
-                                    ref: this.justifyContentBetweenRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Space-Between', this.justifyContentBetweenRef, () => {
                                         this.changeFlexContainerProperty('justify-content', 'space-between');
                                         this.handleActiveButtons('justify', this.justifyContentBetweenRef);
-                                    },
-                                },
-                                {
-                                    title: 'Space-Evenly',
-                                    ref: this.justifyContentEvenlyRef,
-                                    onClick: () => {
+                                    }),
+                                    generateControl('Space-Evenly', this.justifyContentEvenlyRef, () => {
                                         this.changeFlexContainerProperty('justify-content', 'space-evenly');
                                         this.handleActiveButtons('justify', this.justifyContentEvenlyRef);
-                                    },
-                                },
-                            ],
-                        },
-                    ]}
-                />
-                <PlayBox 
-                  flex={true}
-                  reference={this.flexContainerRef}
-                >
+                                    }),
+                                ],
+                            },
+                        ]}
+                    />
+                </div>
+                <PlayBox flex={true} reference={this.flexContainerRef}>
                     <div ref={this.firstBoxRef} className={classes.block}>
                         1
                     </div>

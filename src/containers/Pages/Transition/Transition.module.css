@@ -1,0 +1,38 @@
+.controlTitle {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.block {
+  position: absolute;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  height: 400px;
+  word-wrap: break-word;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+}
+
+.startBtn {
+  background-color: red;
+  color: white;
+  margin-left: .1rem;
+  margin-bottom: 1rem;
+  padding: .75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.startBtn:hover,
+.startBtn:focus {
+  background-color: rgb(200, 0, 0);
+  outline: none;
+}

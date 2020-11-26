@@ -3,7 +3,6 @@ import NavBar from './containers/NavBar/NavBar';
 import SideMenu from './components/SideMenu/SideMenu';
 import { FlexBox, Visibility, Animation, Transition } from './containers/Pages';
 import { Link, Route } from 'react-router-dom';
-import { Fragment } from 'react';
 
 const Home = () => {
     return (
@@ -14,12 +13,12 @@ const Home = () => {
     );
 };
 
-const MainFlow = ({ match }) => {
+const Playground = ({ match }) => {
     return (
-        <Fragment>
+        <div className="playground">
             <SideMenu />
+            <div className="x-spacer"></div>
             <div className="base">
-                <div className="y-spacer"></div>
                 <div className="bodyContainer">
                     <Route component={FlexBox} path={match.url + "/flexbox"} />
                     <Route component={Visibility} path={match.url + "/visibility"} />
@@ -27,7 +26,7 @@ const MainFlow = ({ match }) => {
                     <Route component={Transition} path={match.url + "/transition"} />
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 };
 
@@ -35,9 +34,8 @@ function App() {
     return (
         <div className="App">
             <NavBar />
-            <div className="x-spacer"></div>
             <Route path="/home" component={Home} />
-            <Route path="/main" component={MainFlow} />
+            <Route path="/main" component={Playground} />
         </div>
     );
 }

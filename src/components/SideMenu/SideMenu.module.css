@@ -1,13 +1,13 @@
 .SideMenuContainer {
-  background: linear-gradient(to bottom, red, purple);
-  width: fit-content;
-  height: fit-content;
-  position: fixed;
-  left: 1rem;
-  margin-top: 10px;
-  border-radius: 20px;
   display: flex;
   justify-content: flex-start;
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  background: linear-gradient(to bottom, red, purple);
+  left: 1rem;
+  top: 5rem;
+  border-radius: 20px;
 }
 
 .SideMenu {

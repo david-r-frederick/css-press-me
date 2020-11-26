@@ -5,4 +5,5 @@
   background: linear-gradient(to top, rgb(255, 61, 61), rgb(255, 122, 255));
   border-radius: 5px;
   overflow: hidden;
+  position: relative;
 }

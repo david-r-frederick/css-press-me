@@ -6,6 +6,7 @@
   height: 60px;
   width: 100%;
   background-image: linear-gradient(red, purple);
+  z-index: 8000;
 }
 
 .title {

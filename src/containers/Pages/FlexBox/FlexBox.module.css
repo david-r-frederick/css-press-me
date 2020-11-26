@@ -1,5 +1,9 @@
 .flexBoxContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
 }
 
 .block {
@@ -16,4 +20,6 @@
 .controlTitle {
   font-size: 2rem;
   font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
 }
