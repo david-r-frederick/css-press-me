@@ -1,6 +1,8 @@
 import React from 'react';
 import classes from './Controls.module.css';
 
+// const camelize = (s) => s.replace(/-./g, (x) => x.toUpperCase()[1]);
+
 const Controls = (props) => {
     return (
         <div className={classes.rowHolder}>
@@ -19,14 +21,21 @@ const Controls = (props) => {
                     return (
                         <React.Fragment>
                             <div className={classes.buttonHolder}>
-                                {rowObject.buttons.map((btnObject) => {
+                                {rowObject.buttons.map((cssValue) => {
                                     return (
                                         <button
-                                            ref={btnObject.ref}
-                                            onClick={btnObject.onClick}
+                                            onClick={() => {
+                                                props.click(rowObject.cssProperty, cssValue);
+                                            }}
                                             className={classes.propertyControl}
+                                            style={{
+                                                backgroundColor:
+                                                    props.playboxState[rowObject.cssProperty] === cssValue
+                                                        ? 'black'
+                                                        : 'purple',
+                                            }}
                                         >
-                                            {btnObject.title}
+                                            {cssValue}
                                         </button>
                                     );
                                 })}

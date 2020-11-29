@@ -11,54 +11,54 @@
 
 .colorPillarRed {
   background-color: rgb(255, 0, 0);
-  animation: pillar-grow-1 2800ms infinite both 100ms;
+  animation: pillar-grow-1 3200ms infinite both 100ms;
   left: 25%;
 }
 
 .colorPillarOrangeRed {
   background-color: rgb(255, 30, 30);
-  animation: pillar-grow-2 2800ms infinite both 200ms;
+  animation: pillar-grow-2 3200ms infinite both 200ms;
   left: 30%;
 }
 
 .colorPillarOrange {
   background-color: rgb(255, 60, 60);
-  animation: pillar-grow-3 2800ms infinite both 300ms;
+  animation: pillar-grow-3 3200ms infinite both 300ms;
   left: 35%;
 }
 
 .colorPillarMacaroni {
   background-color: rgb(255, 90, 90);
-  animation: pillar-grow-4 2800ms infinite both 400ms;
+  animation: pillar-grow-4 3200ms infinite both 400ms;
   left: 40%;
 }
 .colorPillarYellow {
   background-color: rgb(255, 120, 120);
-  animation: pillar-grow-5 2800ms infinite both 500ms; 
+  animation: pillar-grow-5 3200ms infinite both 500ms; 
   left: 45%;
 }
 
 .colorPillarGreen {
   background-color: rgb(255, 150, 150);
-  animation: pillar-grow-4 2800ms infinite both 400ms;
+  animation: pillar-grow-4 3200ms infinite both 600ms;
   left: 50%;
 }
 
 .colorPillarBlue {
   background-color: rgb(255, 180, 180);
-  animation: pillar-grow-3 2800ms infinite both 300ms;
+  animation: pillar-grow-3 3200ms infinite both 700ms;
   left: 55%;
 }
 
 .colorPillarIndigo {
   background-color: rgb(255, 210, 210);
-  animation: pillar-grow-2 2800ms infinite both 200ms;
+  animation: pillar-grow-2 3200ms infinite both 800ms;
   left: 60%;
 }
 
 .colorPillarViolet {
   background-color: rgb(255, 240, 240);
-  animation: pillar-grow-1 2800ms infinite both 100ms;
+  animation: pillar-grow-1 3200ms infinite both 900ms;
   left: 65%;
 }
 
