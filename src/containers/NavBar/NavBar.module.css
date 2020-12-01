@@ -3,6 +3,7 @@
   top: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 60px;
   width: 100%;
   background-image: linear-gradient(red, purple);
@@ -17,4 +18,32 @@
   margin-bottom: 0;
   font-size: 2.2rem;
   text-decoration: none;
+}
+
+.navOption {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: background-color 150ms ease-out;
+}
+
+.navOptionText {
+  color: white;
+  font-size: 1.4rem;
+  text-decoration: none;
+  padding: 0 1rem;
+  margin: 0;
+}
+
+.navOption:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navOptionsContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
 }

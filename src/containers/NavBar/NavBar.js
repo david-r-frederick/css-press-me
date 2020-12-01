@@ -6,7 +6,20 @@ class NavBar extends Component {
     render() {
         return (
             <div className={classes.navbarContainer}>
-                <Link className={classes.title} to="/home">CSS Press Me</Link>
+                <Link style={{ textDecoration: 'none' }} to="/home">
+                    <h1 className={classes.title}>CSS Press Me</h1>
+                </Link>
+                <div className={classes.navOptionsContainer}>
+                    <Link className={classes.navOption} to="/playbox/flexbox">
+                        <p className={classes.navOptionText}>PlayBox</p>
+                    </Link>
+                    <Link className={classes.navOption} to="/">
+                        <p className={classes.navOptionText}>About</p>
+                    </Link>
+                    <Link className={classes.navOption} to="/">
+                        <p className={classes.navOptionText}>Contact</p>
+                    </Link>
+                </div>
             </div>
         );
     }

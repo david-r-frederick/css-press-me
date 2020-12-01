@@ -25,6 +25,11 @@ export class Visibility extends Component {
                                 buttons: ['1', '.75', '.5', '.25', '0'],
                             },
                             {
+                                subtitle: 'Height',
+                                cssProperty: 'height',
+                                buttons: ['100%', '75%', '50%', '25%', '0'],
+                            },
+                            {
                                 subtitle: 'Width',
                                 cssProperty: 'width',
                                 buttons: ['100%', '75%', '50%', '25%', '0'],

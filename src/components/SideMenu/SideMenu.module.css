@@ -36,6 +36,7 @@
   background-color: black;
   z-index: -1;
   border-radius: 15px;
+  transition: opacity 200ms;
 }
 
 .SideMenuItem:hover::after,

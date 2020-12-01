@@ -3,16 +3,16 @@ import classes from './GrowingHeart.module.css';
 
 const GrowingHeart = () => {
     return (
-        <div class={classes.heartGrowContainer}>
-            <span class={classes.colorPillarRed}></span>
-            <span class={classes.colorPillarOrangeRed}></span>
-            <span class={classes.colorPillarOrange}></span>
-            <span class={classes.colorPillarMacaroni}></span>
-            <span class={classes.colorPillarYellow}></span>
-            <span class={classes.colorPillarGreen}></span>
-            <span class={classes.colorPillarBlue}></span>
-            <span class={classes.colorPillarIndigo}></span>
-            <span class={classes.colorPillarViolet}></span>
+        <div className={classes.heartGrowContainer}>
+            <span className={classes.colorPillarRed}></span>
+            <span className={classes.colorPillarOrangeRed}></span>
+            <span className={classes.colorPillarOrange}></span>
+            <span className={classes.colorPillarMacaroni}></span>
+            <span className={classes.colorPillarYellow}></span>
+            <span className={classes.colorPillarGreen}></span>
+            <span className={classes.colorPillarBlue}></span>
+            <span className={classes.colorPillarIndigo}></span>
+            <span className={classes.colorPillarViolet}></span>
         </div>
     );
 };

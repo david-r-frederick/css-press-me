@@ -6,7 +6,9 @@ import PlayBox from '../../../components/PlayBox/PlayBox';
 export class FlexBox extends Component {
     state = {
       'display': 'flex',
+      'flex-direction': 'row',
       'justify-content': 'flex-start',
+      'align-items': 'flex-start',
     };
 
     setPlayboxCSSProp = (key, value) => {
