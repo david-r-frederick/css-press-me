@@ -13,30 +13,29 @@ const unitLegend = {
 
 export class Transition extends Component {
     state = {
-        blockStyle: {
-            transitionDuration: '250ms',
-            height: '150px',
-            width: '150px',
-            left: '50%',
-            top: '50%',
-            transformOption: '',
-        },
-        start: '1',
-        end: '70',
-        current: '',
+        transitionDuration: '250ms',
+        height: '30%',
+        width: '20%',
+        left: '40%',
+        top: '35%',
+        transitionTimingFunction: 'linear',
+        transitionProperty: 'height',
+        start: '50',
+        end: '200',
+        current: '50',
     };
 
     renderStyles = () => {
-        const { current, blockStyle } = this.state;
-        if (blockStyle.transitionProperty === 'transform') {
+        const { current, transitionProperty, transformOption } = this.state;
+        if (transitionProperty === 'transform') {
             return {
-                ...blockStyle,
-                transform: `${blockStyle.transformOption}(${current}${unitLegend[blockStyle.transformOption]})`,
+                ...this.state,
+                transform: `${transformOption}(${current}${unitLegend[transformOption]})`,
             };
         } else {
             return {
-                ...blockStyle,
-                [blockStyle.transitionProperty]: current + 'px',
+                ...this.state,
+                [transitionProperty]: current + 'px',
             };
         }
     };
@@ -45,17 +44,14 @@ export class Transition extends Component {
         this.setState((prevState) => {
             return {
                 ...prevState,
-                blockStyle: {
-                    ...prevState.blockStyle,
-                    [key]: value,
-                },
+                [key]: value,
                 current: prevState.start,
             };
         });
     };
 
     renderTransformOptions = () => {
-        return this.state.blockStyle.transitionProperty === 'transform'
+        return this.state.transitionProperty === 'transform'
             ? {
                   subtitle: 'Transform Value',
                   cssProperty: 'transformOption',
@@ -69,13 +65,13 @@ export class Transition extends Component {
             <div className={classes.TransitionContainer}>
                 <h1 className={classes.controlTitle}>TRANSITION</h1>
                 <Controls
-                    playboxState={this.state.blockStyle}
+                    playboxState={this.state}
                     click={this.setBlockProp}
                     data={[
                         {
                             subtitle: 'Property to Transition',
                             cssProperty: 'transitionProperty',
-                            buttons: ['transform', 'height', 'width', 'top', 'left'],
+                            buttons: ['height', 'width', 'top', 'left', 'transform'],
                         },
                         this.renderTransformOptions(),
                         {
@@ -86,7 +82,7 @@ export class Transition extends Component {
                         {
                             subtitle: 'Transition Timing Function',
                             cssProperty: 'transitionTimingFunction',
-                            buttons: ['ease-in', 'ease-out', 'ease', 'linear'],
+                            buttons: ['linear', 'ease-in', 'ease-out', 'ease'],
                         },
                     ]}
                 />
@@ -115,18 +111,15 @@ export class Transition extends Component {
                         <label htmlFor="transition-end-value">Ending Value</label>
                     </div>
                     <button
-                        disabled={this.state.blockStyle['transitionProperty'] ? false : true}
+                        disabled={this.state.transitionProperty ? false : true}
                         className={classes.startBtn}
                         onClick={(e) => {
-                            const previousDuration = this.state.blockStyle.transitionDuration;
+                            const previousDuration = this.state.transitionDuration;
                             this.setState(
                                 (prevState) => {
                                     return {
                                         ...prevState,
-                                        blockStyle: {
-                                            ...prevState.blockStyle,
-                                            transitionDuration: '0ms',
-                                        },
+                                        transitionDuration: '0ms',
                                         current: prevState.start,
                                     };
                                 },
@@ -134,10 +127,7 @@ export class Transition extends Component {
                                     this.setState((prevState) => {
                                         return {
                                             ...prevState,
-                                            blockStyle: {
-                                                ...prevState.blockStyle,
-                                                transitionDuration: previousDuration,
-                                            },
+                                            transitionDuration: previousDuration,
                                             current: prevState.end,
                                         };
                                     });
