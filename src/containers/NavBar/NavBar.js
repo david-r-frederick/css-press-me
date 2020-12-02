@@ -6,7 +6,7 @@ class NavBar extends Component {
     render() {
         return (
             <div className={classes.navbarContainer}>
-                <Link style={{ textDecoration: 'none' }} to="/home">
+                <Link style={{ textDecoration: 'none' }} to="/welcome">
                     <h1 className={classes.title}>CSS Press Me</h1>
                 </Link>
                 <div className={classes.navOptionsContainer}>

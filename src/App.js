@@ -3,6 +3,7 @@ import NavBar from './containers/NavBar/NavBar';
 import SideMenu from './components/SideMenu/SideMenu';
 import { FlexBox, Visibility, Animation, Transition } from './containers/Pages';
 import { Route } from 'react-router-dom';
+import Welcome from './containers/Pages/Welcome/Welcome';
 
 const Home = () => {
     return (
@@ -12,7 +13,7 @@ const Home = () => {
     );
 };
 
-const Playground = ({ match }) => {
+const Playground = () => {
     return (
         <div className="playground">
             <SideMenu />
@@ -32,9 +33,12 @@ const Playground = ({ match }) => {
 function App() {
     return (
         <div className="App">
+          <div className="NavBarContainer">
             <NavBar />
-            <Route path="/home" component={Home} />
+          </div>
+            <Route path="/welcome" component={Welcome} />
             <Route path="/playbox" component={Playground} />
+            <Route path="/" exact component={Home} />
         </div>
     );
 }

@@ -6,9 +6,9 @@ import PlayBox from '../../../components/PlayBox/PlayBox';
 const unitLegend = {
     rotate: 'deg',
     skew: 'deg',
-    scale: '',
     translateX: '%',
     translateY: '%',
+    scale: '',
 };
 
 export class Transition extends Component {
@@ -19,31 +19,29 @@ export class Transition extends Component {
             width: '150px',
             left: '50%',
             top: '50%',
+            transformOption: '',
         },
-        transitionPropStartVal: '1',
-        transitionPropEndVal: '70',
-        transformOption: '',
-        showTransformOptions: false,
-        unit: 'px',
+        start: '1',
+        end: '70',
+        current: '',
+    };
+
+    renderStyles = () => {
+        const { current, blockStyle } = this.state;
+        if (blockStyle.transitionProperty === 'transform') {
+            return {
+                ...blockStyle,
+                transform: `${blockStyle.transformOption}(${current}${unitLegend[blockStyle.transformOption]})`,
+            };
+        } else {
+            return {
+                ...blockStyle,
+                [blockStyle.transitionProperty]: current + 'px',
+            };
+        }
     };
 
     setBlockProp = (key, value) => {
-        if (value === 'transform') {
-            this.setState({ showTransformOptions: true });
-        } else if (['height', 'width', 'top', 'left'].includes(value)) {
-            this.setState({
-                showTransformOptions: false,
-                transformOption: '',
-                unit: 'px',
-            });
-        }
-        if (key === 'transform') {
-            this.setState({
-                transformOption: value,
-                unit: unitLegend[value],
-            });
-            return;
-        }
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -51,15 +49,16 @@ export class Transition extends Component {
                     ...prevState.blockStyle,
                     [key]: value,
                 },
+                current: prevState.start,
             };
         });
     };
 
     renderTransformOptions = () => {
-        return this.state.showTransformOptions
+        return this.state.blockStyle.transitionProperty === 'transform'
             ? {
                   subtitle: 'Transform Value',
-                  cssProperty: 'transform',
+                  cssProperty: 'transformOption',
                   buttons: ['rotate', 'skew', 'scale', 'translateX', 'translateY'],
               }
             : null;
@@ -96,23 +95,11 @@ export class Transition extends Component {
                         <input
                             id="transition-start-value"
                             type="number"
-                            value={this.state.transitionPropStartVal}
+                            value={this.state.start}
                             onChange={(ev) => {
-                                this.setState((prevState) => {
-                                    let cssProperty = prevState.blockStyle['transitionProperty'];
-                                    let value = ev.target.value + 'px';
-                                    if (prevState.transformOption) {
-                                        cssProperty = 'transform';
-                                        value = `${prevState.transformOption}(${ev.target.value}${prevState.unit})`;
-                                    }
-                                    return {
-                                        ...prevState,
-                                        blockStyle: {
-                                            ...prevState.blockStyle,
-                                            [cssProperty]: value,
-                                        },
-                                        transitionPropStartVal: ev.target.value,
-                                    };
+                                this.setState({
+                                    start: ev.target.value,
+                                    current: ev.target.value,
                                 });
                             }}
                         />
@@ -122,10 +109,8 @@ export class Transition extends Component {
                         <input
                             id="transition-end-value"
                             type="number"
-                            onChange={(ev) => {
-                                this.setState({ transitionPropEndVal: ev.target.value });
-                            }}
-                            value={this.state.transitionPropEndVal}
+                            value={this.state.end}
+                            onChange={(ev) => this.setState({ end: ev.target.value })}
                         />
                         <label htmlFor="transition-end-value">Ending Value</label>
                     </div>
@@ -136,36 +121,24 @@ export class Transition extends Component {
                             const previousDuration = this.state.blockStyle.transitionDuration;
                             this.setState(
                                 (prevState) => {
-                                    let cssProperty = prevState.blockStyle['transitionProperty'];
-                                    let value = prevState.transitionPropStartVal + 'px';
-                                    if (prevState.transformOption) {
-                                        cssProperty = 'transform';
-                                        value = `${prevState.transformOption}(${prevState.transitionPropStartVal}${prevState.unit})`;
-                                    }
                                     return {
                                         ...prevState,
                                         blockStyle: {
                                             ...prevState.blockStyle,
                                             transitionDuration: '0ms',
-                                            [cssProperty]: value,
                                         },
+                                        current: prevState.start,
                                     };
                                 },
                                 () => {
                                     this.setState((prevState) => {
-                                        let cssProperty = prevState.blockStyle['transitionProperty'];
-                                        let value = prevState.transitionPropEndVal + 'px';
-                                        if (prevState.transformOption) {
-                                            cssProperty = 'transform';
-                                            value = `${prevState.transformOption}(${prevState.transitionPropEndVal}${prevState.unit})`;
-                                        }
                                         return {
                                             ...prevState,
                                             blockStyle: {
                                                 ...prevState.blockStyle,
                                                 transitionDuration: previousDuration,
-                                                [cssProperty]: value,
                                             },
+                                            current: prevState.end,
                                         };
                                     });
                                 }
@@ -178,18 +151,8 @@ export class Transition extends Component {
                         className={classes.resetBtn}
                         onClick={() => {
                             this.setState((prevState) => {
-                                let cssProperty = prevState.blockStyle['transitionProperty'];
-                                let value = `${prevState.transitionPropStartVal}px`;
-                                if (prevState.transformOption) {
-                                    cssProperty = 'transform';
-                                    value = `${prevState.transformOption}(${prevState.transitionPropStartVal}${prevState.unit})`;
-                                }
                                 return {
-                                    ...prevState,
-                                    blockStyle: {
-                                        ...prevState.blockStyle,
-                                        [cssProperty]: value,
-                                    },
+                                    current: prevState.start,
                                 };
                             });
                         }}
@@ -198,7 +161,7 @@ export class Transition extends Component {
                     </button>
                 </div>
                 <PlayBox>
-                    <div style={this.state.blockStyle} className={classes.block}>
+                    <div style={this.renderStyles()} className={classes.block}>
                         Change Me
                     </div>
                 </PlayBox>
