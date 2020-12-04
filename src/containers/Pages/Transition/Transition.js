@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import Controls from '../../../components/Controls/Controls';
 import classes from './Transition.module.css';
 import PlayBox from '../../../components/PlayBox/PlayBox';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 const unitLegend = {
     rotate: 'deg',
-    skew: 'deg',
+    skewX: 'deg',
+    skewY: 'deg',
     translateX: '%',
     translateY: '%',
+    rotateX: 'deg',
+    rotateY: 'deg',
     scale: '',
+    scaleX: '',
+    scaleY: '',
+    opacity: '%',
 };
 
 export class Transition extends Component {
@@ -20,23 +27,21 @@ export class Transition extends Component {
         top: '35%',
         transitionTimingFunction: 'linear',
         transitionProperty: 'height',
-        start: '50',
+        opacity: '1',
+        start: '1',
         end: '200',
         current: '50',
     };
 
     renderStyles = () => {
         const { current, transitionProperty, transformOption } = this.state;
-        if (transitionProperty === 'transform') {
-            return {
-                ...this.state,
-                transform: `${transformOption}(${current}${unitLegend[transformOption]})`,
-            };
-        } else {
-            return {
-                ...this.state,
-                [transitionProperty]: current + 'px',
-            };
+        switch (transitionProperty) {
+            case 'transform':
+                return { ...this.state, transform: `${transformOption}(${current}${unitLegend[transformOption]})` };
+            case 'opacity':
+                return { ...this.state, opacity: current + '%' };
+            default:
+                return { ...this.state, [transitionProperty]: current + 'px' };
         }
     };
 
@@ -55,7 +60,18 @@ export class Transition extends Component {
             ? {
                   subtitle: 'Transform Value',
                   cssProperty: 'transformOption',
-                  buttons: ['rotate', 'skew', 'scale', 'translateX', 'translateY'],
+                  buttons: [
+                      'rotate',
+                      'skewX',
+                      'skewY',
+                      'scale',
+                      'scaleX',
+                      'scaleY',
+                      'translateX',
+                      'translateY',
+                      'rotateX',
+                      'rotateY',
+                  ],
               }
             : null;
     };
@@ -63,7 +79,7 @@ export class Transition extends Component {
     render() {
         return (
             <div className={classes.TransitionContainer}>
-                <h1 className={classes.controlTitle}>TRANSITION</h1>
+                <PageTitle title="Transition" />
                 <Controls
                     playboxState={this.state}
                     click={this.setBlockProp}
@@ -71,7 +87,7 @@ export class Transition extends Component {
                         {
                             subtitle: 'Property to Transition',
                             cssProperty: 'transitionProperty',
-                            buttons: ['height', 'width', 'top', 'left', 'transform'],
+                            buttons: ['height', 'width', 'top', 'left', 'opacity', 'transform'],
                         },
                         this.renderTransformOptions(),
                         {
@@ -111,9 +127,8 @@ export class Transition extends Component {
                         <label htmlFor="transition-end-value">Ending Value</label>
                     </div>
                     <button
-                        disabled={this.state.transitionProperty ? false : true}
                         className={classes.startBtn}
-                        onClick={(e) => {
+                        onClick={() => {
                             const previousDuration = this.state.transitionDuration;
                             this.setState(
                                 (prevState) => {
@@ -142,6 +157,7 @@ export class Transition extends Component {
                         onClick={() => {
                             this.setState((prevState) => {
                                 return {
+                                    ...prevState,
                                     current: prevState.start,
                                 };
                             });

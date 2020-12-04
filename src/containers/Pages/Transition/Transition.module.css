@@ -53,6 +53,10 @@
   outline: none;
 }
 
+.startBtn:disabled {
+  background-color: #aaa;
+}
+
 .startStopContainer {
   display: flex;
   justify-content: center;

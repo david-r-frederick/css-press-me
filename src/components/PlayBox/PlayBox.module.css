@@ -1,5 +1,6 @@
 .playBoxContainer {
-  height: 30rem;
+  min-height: 30rem;
+  margin-bottom: 4rem;
   width: 100%;
   background: linear-gradient(to top, rgb(255, 61, 61), rgb(255, 122, 255));
   border-radius: 5px;

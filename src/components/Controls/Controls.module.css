@@ -1,6 +1,5 @@
 .rowHolder {
   display: flex;
-  margin-bottom: 1rem;
 }
 
 .subtitles,
@@ -17,12 +16,12 @@
 }
 
 .subtitles {
-  margin-right: 2%;
   margin-left: auto;
 }
 
 .buttonHolder {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .propertyTitle,

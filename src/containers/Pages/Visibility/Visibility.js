@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Controls from '../../../components/Controls/Controls';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 import PlayBox from '../../../components/PlayBox/PlayBox';
 import classes from './Visibility.module.css';
 
@@ -10,7 +11,7 @@ export class Visibility extends Component {
         return (
             <div className={classes.opacityContainer}>
                 <div>
-                    <h1 className={classes.controlTitle}>VISIBILITY</h1>
+                    <PageTitle title="Visibility" />
                     <Controls
                         playboxState={this.state}
                         click={(key, value) => {

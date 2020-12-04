@@ -1,22 +1,21 @@
 import './App.css';
 import NavBar from './containers/NavBar/NavBar';
 import SideMenu from './components/SideMenu/SideMenu';
-import { FlexBox, Visibility, Animation, Transition } from './containers/Pages';
+import { FlexBox, Visibility, Animation, Transition, Home } from './containers/Pages';
 import { Route } from 'react-router-dom';
 import Welcome from './containers/Pages/Welcome/Welcome';
-
-const Home = () => {
-    return (
-        <div>
-            <h1>HOME</h1>
-        </div>
-    );
-};
 
 const Playground = () => {
     return (
         <div className="playground">
-            <SideMenu />
+            <SideMenu
+                items={[
+                    { title: 'Flexbox', path: '/playbox/flexbox' },
+                    { title: 'Visibility', path: '/playbox/visibility' },
+                    { title: 'Animation', path: '/playbox/animation' },
+                    { title: 'Transition', path: '/playbox/transition' },
+                ]}
+            />
             <div className="x-spacer"></div>
             <div className="base">
                 <div className="bodyContainer">
@@ -33,9 +32,9 @@ const Playground = () => {
 function App() {
     return (
         <div className="App">
-          <div className="NavBarContainer">
-            <NavBar />
-          </div>
+            <div className="NavBarContainer">
+                <NavBar />
+            </div>
             <Route path="/welcome" component={Welcome} />
             <Route path="/playbox" component={Playground} />
             <Route path="/" exact component={Home} />

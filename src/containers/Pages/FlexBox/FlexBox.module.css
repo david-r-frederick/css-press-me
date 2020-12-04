@@ -1,25 +1,26 @@
 .flexBoxContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
 }
 
 .block {
-  background-color: black;
-  color: white;
-  text-align: center;
-  font-size: 2.8rem;
-  width: 4rem;
-  margin: 0.5rem;
-  border-radius: 5px;
-  padding-bottom: 2px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 2.8rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    padding-bottom: 2px;
 }
 
-.controlTitle {
-  font-size: 2rem;
-  font-weight: 400;
-  text-align: center;
-  text-transform: uppercase;
+.blockControlsContainer {
+  display: flex;
+}
+
+h3 {
+  padding-left: 0.5rem;
 }
