@@ -1,6 +1,21 @@
-.title {
+.welcomeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.first {
   text-align: center;
-  animation: fade-in 1000ms;
+  animation: fade-in 3000ms forwards;
+  transform: translateY(-60px);
+}
+
+.second {
+  text-align: center;
+  animation: fade-in 3000ms forwards 3000ms;
+  transform: translateY(-60px);
+  opacity: 0;
 }
 
 @keyframes fade-in {
@@ -8,7 +23,11 @@
     opacity: 0;
   }
 
-  100% {
+  50% {
     opacity: 1;
+  }
+  
+  100% {
+    opacity: 0;
   }
 }

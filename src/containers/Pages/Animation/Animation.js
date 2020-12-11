@@ -8,7 +8,7 @@ import ThreeDeeFlip from './ThreeDeeFlip/ThreeDeeFlip';
 export class Animation extends Component {
     render() {
         return (
-            <div className={classes.AnimationContainer}>
+            <div className={classes.animationContainer}>
                 <div>
                     <PageTitle title="Animation" />
                     <Controls data={[]} />

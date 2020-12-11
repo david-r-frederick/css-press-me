@@ -1,45 +1,30 @@
 import './App.css';
 import NavBar from './containers/NavBar/NavBar';
-import SideMenu from './components/SideMenu/SideMenu';
-import { FlexBox, Visibility, Animation, Transition, Home } from './containers/Pages';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Welcome from './containers/Pages/Welcome/Welcome';
+import Playground from './containers/Playground/Playground';
+import About from './containers/Pages/About/About';
+import Contact from './containers/Pages/Contact/Contact';
+import { Component } from 'react';
 
-const Playground = () => {
-    return (
-        <div className="playground">
-            <SideMenu
-                items={[
-                    { title: 'Flexbox', path: '/playbox/flexbox' },
-                    { title: 'Visibility', path: '/playbox/visibility' },
-                    { title: 'Animation', path: '/playbox/animation' },
-                    { title: 'Transition', path: '/playbox/transition' },
-                ]}
-            />
-            <div className="x-spacer"></div>
-            <div className="base">
-                <div className="bodyContainer">
-                    <Route component={FlexBox} path="/playbox/flexbox" />
-                    <Route component={Visibility} path="/playbox/visibility" />
-                    <Route component={Animation} path="/playbox/animation" />
-                    <Route component={Transition} path="/playbox/transition" />
-                </div>
+class App extends Component {
+    render() {
+        return (
+            <div className="App">
+                <Route
+                    render={(props) => {
+                        return props.location.pathname === '/' ? null : <NavBar />;
+                    }}
+                />
+                <Switch>
+                    <Route path="/playbox" component={Playground} />
+                    <Route path="/about" component={About} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/" exact component={Welcome} />
+                </Switch>
             </div>
-        </div>
-    );
-};
-
-function App() {
-    return (
-        <div className="App">
-            <div className="NavBarContainer">
-                <NavBar />
-            </div>
-            <Route path="/welcome" component={Welcome} />
-            <Route path="/playbox" component={Playground} />
-            <Route path="/" exact component={Home} />
-        </div>
-    );
+        );
+    }
 }
 
 export default App;

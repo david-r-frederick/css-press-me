@@ -3,6 +3,7 @@ import classes from './FlexBox.module.css';
 import Controls from '../../../components/Controls/Controls';
 import PlayBox from '../../../components/PlayBox/PlayBox';
 import PageTitle from '../../../components/PageTitle/PageTitle';
+import Tips from '../../../components/Tips/Tips';
 
 export class FlexBox extends Component {
     state = {
@@ -21,7 +22,9 @@ export class FlexBox extends Component {
         },
         blockStyle: {
             width: '4rem',
+            height: '4rem',
         },
+        animateControls: true,
     };
 
     setCSSProp = (element, key, value) => {
@@ -40,61 +43,66 @@ export class FlexBox extends Component {
         return (
             <div className={classes.flexBoxContainer}>
                 <PageTitle title="FlexBox" />
-                <div className={classes.playBoxControlsContainer}>
-                    <h3>PlayBox Controls</h3>
-                    <Controls
-                        playboxState={this.state.playBoxStyle}
-                        click={(key, value) => this.setCSSProp('playBoxStyle', key, value)}
-                        data={[
-                            {
-                                subtitle: 'Flex-Direction Properties',
-                                cssProperty: 'flexDirection',
-                                buttons: ['row', 'row-reverse', 'column', 'column-reverse'],
-                            },
-                            {
-                                subtitle: 'Align-Items Properties',
-                                cssProperty: 'alignItems',
-                                buttons: ['flex-start', 'center', 'flex-end', 'stretch'],
-                            },
-                            {
-                                subtitle: 'Justify-Content Properties',
-                                cssProperty: 'justifyContent',
-                                buttons: [
-                                    'flex-start',
-                                    'center',
-                                    'flex-end',
-                                    'space-between',
-                                    'space-around',
-                                    'space-evenly',
-                                ],
-                            },
-                            {
-                                subtitle: 'Flex-Wrap Properties',
-                                cssProperty: 'flexWrap',
-                                buttons: ['nowrap', 'wrap', 'wrap-reverse'],
-                            },
-                            {
-                                subtitle: 'Align-Content Properties',
-                                cssProperty: 'alignContent',
-                                buttons: [
-                                    'initial',
-                                    'flex-start',
-                                    'center',
-                                    'flex-end',
-                                    'stretch',
-                                    'space-between',
-                                    'space-around',
-                                ],
-                            },
-                        ]}
-                    />
+                <div className={classes.top}>
+                    <div className={classes.playboxControlsContainer}>
+                        <h3>PlayBox Controls</h3>
+                        <Controls
+                            playboxState={this.state.playBoxStyle}
+                            click={(key, value) => this.setCSSProp('playBoxStyle', key, value)}
+                            animate={this.state.animateControls}
+                            data={[
+                                {
+                                    subtitle: 'Flex-Direction Properties',
+                                    cssProperty: 'flexDirection',
+                                    buttons: ['row', 'row-reverse', 'column', 'column-reverse'],
+                                },
+                                {
+                                    subtitle: 'Align-Items Properties',
+                                    cssProperty: 'alignItems',
+                                    buttons: ['flex-start', 'center', 'flex-end', 'stretch'],
+                                },
+                                {
+                                    subtitle: 'Justify-Content Properties',
+                                    cssProperty: 'justifyContent',
+                                    buttons: [
+                                        'flex-start',
+                                        'center',
+                                        'flex-end',
+                                        'space-between',
+                                        'space-around',
+                                        'space-evenly',
+                                    ],
+                                },
+                                {
+                                    subtitle: 'Flex-Wrap Properties',
+                                    cssProperty: 'flexWrap',
+                                    buttons: ['nowrap', 'wrap', 'wrap-reverse'],
+                                },
+                                {
+                                    subtitle: 'Align-Content Properties',
+                                    cssProperty: 'alignContent',
+                                    buttons: [
+                                        'initial',
+                                        'flex-start',
+                                        'center',
+                                        'flex-end',
+                                        'stretch',
+                                        'space-between',
+                                        'space-around',
+                                    ],
+                                },
+                            ]}
+                        />
+                    </div>
+                    <Tips rows={6} />
                 </div>
                 <div className={classes.blockControlsContainer}>
-                    <div style={{ width: 'fit-content' }}>
+                    <div>
                         <h3>All Blocks Controls</h3>
                         <Controls
                             playboxState={this.state.blockStyle}
                             click={(key, value) => this.setCSSProp('blockStyle', key, value)}
+                            animate={this.state.animateControls}
                             data={[
                                 {
                                     subtitle: 'Width',
@@ -114,6 +122,7 @@ export class FlexBox extends Component {
                         <Controls
                             playboxState={this.state.blockOneStyle}
                             click={(key, value) => this.setCSSProp('blockOneStyle', key, value)}
+                            animate={this.state.animateControls}
                             data={[
                                 {
                                     subtitle: 'Align-Self',
@@ -133,18 +142,15 @@ export class FlexBox extends Component {
                     <div style={{ ...this.state.blockOneStyle, ...this.state.blockStyle }} className={classes.block}>
                         1
                     </div>
-                    <div style={this.state.blockStyle} className={classes.block}>
-                        2
-                    </div>
-                    <div style={this.state.blockStyle} className={classes.block}>
-                        3
-                    </div>
-                    <div style={this.state.blockStyle} className={classes.block}>
-                        4
-                    </div>
-                    <div style={this.state.blockStyle} className={classes.block}>
-                        5
-                    </div>
+                    {Array(4)
+                        .fill()
+                        .map((el, i) => {
+                            return (
+                                <div style={this.state.blockStyle} className={classes.block}>
+                                    {i + 2}
+                                </div>
+                            );
+                        })}
                 </PlayBox>
             </div>
         );

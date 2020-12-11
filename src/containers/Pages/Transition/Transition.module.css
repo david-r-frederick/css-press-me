@@ -1,73 +1,107 @@
+.transitionContainer {
+  width: 100%;
+}
+
 .controlTitle {
-  font-size: 2rem;
-  font-weight: 400;
-  text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
 }
 
 .block {
-  position: absolute;
-  background-color: black;
-  color: white;
-  text-align: center;
-  font-size: 1.8rem;
-  word-wrap: break-word;
-  padding: 1rem;
-  margin: 0.5rem;
-  border-radius: 5px;
-  box-sizing: border-box;
+    position: absolute;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 1.8rem;
+    word-wrap: break-word;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .startBtn,
 .resetBtn {
-  margin-left: .1rem;
-  padding: .75rem 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  white-space: nowrap;
-  font-weight: 600;
-  font-size: 14px;
+    margin-left: 0.1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .startBtn {
-  background-color: red;
-  color: white;
-  border: 1px solid transparent;
+    background-color: var(--color-primary);
+    color: white;
+    border: 1px solid transparent;
 }
 
 .resetBtn {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-  transition: background-color 200ms, color 200ms;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    transition: background-color 200ms, color 200ms;
 }
 
 .resetBtn:hover {
-  background-color: black;
-  color: white;
-  border: 1px solid white;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
 }
 
 .startBtn:hover,
 .startBtn:focus {
-  background-color: rgb(200, 0, 0);
-  outline: none;
+    background-color: rgb(200, 0, 0);
+    outline: none;
 }
 
 .startBtn:disabled {
-  background-color: #aaa;
+    background-color: #aaa;
 }
 
 .startStopContainer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
 }
 
-.startInput,
-.stopInput {
-  display: flex;
-  flex-direction: column;
-  font-size: .7rem;
-  margin-right: .25rem;
+.startInputContainer,
+.stopInputContainer {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+    margin-right: 0.25rem;
+}
+
+.unitSelectContainer {
+    padding-left: 1.5rem;
+}
+
+.unitSelect {
+    border: 2px solid black;
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 20px;
+    margin: 0 3px;
+}
+
+.unitSelect:focus {
+    outline: none;
+    background-color: #eee;
+}
+
+.valueInput {
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+    width: 80%;
+}
+
+.controlsContainer {
+    flex: 7;
+}
+
+.top {
+    display: flex;
 }

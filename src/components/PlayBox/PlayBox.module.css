@@ -1,9 +1,38 @@
-.playBoxContainer {
-  min-height: 30rem;
-  margin-bottom: 4rem;
-  width: 100%;
-  background: linear-gradient(to top, rgb(255, 61, 61), rgb(255, 122, 255));
-  border-radius: 5px;
+.playboxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   overflow: hidden;
-  position: relative;
+  width: 100%;
+  min-width: 100px;
+  height: 40rem;
+  min-height: 100px;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  resize: both;
+}
+
+.playbox {
+  height: 100%;
+  width: 100%;
+  min-height: 150px;
+  background-color: var(--color-primary);
+  overflow: hidden;
+  transition: width 0ms, height 0ms;
+}
+
+.resetBtn {
+  padding: 0.25rem 0.5rem;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.resetBtn:hover {
+  color: black;
+}
+
+.resetBtn:focus {
+  outline: 1px solid rgba(31, 31, 31, 0.5);
 }

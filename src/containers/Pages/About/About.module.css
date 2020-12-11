@@ -1,0 +1,18 @@
+.aboutContainer {
+  height: 100%;
+}
+
+.aboutSection {
+  padding: 3% 20%;
+}
+
+.aboutSectionHeading {
+  text-align: left;
+  padding: 19px 0;
+  margin: 0;
+}
+
+.aboutSectionText {
+  margin: 0;
+  padding-bottom: 19px;
+}

@@ -6,8 +6,19 @@
   justify-content: space-between;
   height: 60px;
   width: 100%;
-  background-image: linear-gradient(red, purple);
+  background-color: black;
   z-index: 8000;
+  animation: move-down 500ms forwards;
+}
+
+@keyframes move-down {
+  0% {
+    top: -60px;
+  }
+
+  100% {
+    top: 0;
+  }
 }
 
 .title {

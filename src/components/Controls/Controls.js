@@ -1,42 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import classes from './Controls.module.css';
 
-const Controls = ({ data, playboxState, click }) => {
-    return (
-        <div className={classes.rowHolder}>
-            <div className={classes.subtitles}>
-                {data.map((rowObject) => {
-                    return rowObject ? <h3 className={classes.propertyTitle}>{rowObject.subtitle}</h3> : null;
-                })}
-            </div>
-            <div className={classes.buttonsContainer}>
-                {data.map((rowObject) => {
-                    if (rowObject) {
-                        return (
-                            <div className={classes.buttonHolder}>
-                                {rowObject.buttons.map((cssValue) => {
-                                    let backgroundColor = 'purple';
-                                    if (playboxState[rowObject.cssProperty] === cssValue) {
-                                        backgroundColor = 'black';
-                                    }
-                                    return (
-                                        <button
-                                            onClick={() => click(rowObject.cssProperty, cssValue)}
-                                            className={classes.propertyControl}
-                                            style={{ backgroundColor }}
-                                        >
-                                            {cssValue}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        );
-                    }
-                    return null;
-                })}
-            </div>
-        </div>
-    );
+class Controls extends Component {
+  render () {
+    const { data, playboxState, click, onSelection } = this.props;
+        let longestSubtitleLength = Math.max(
+            ...data.map((obj) => {
+                return obj !== null ? obj.subtitle.length : 0;
+            })
+        );
+      return (
+          <div className={classes.rowsContainer}>
+              {data.map((rowObj) => {
+                  if (!rowObj) {
+                      return null;
+                  }
+                  return (
+                      <div className={classes.row}>
+                          <h3
+                              style={{ width: `calc(${longestSubtitleLength}rem / 2 + 12px)` }}
+                              className={classes.propertyTitle}
+                          >
+                              {rowObj.subtitle}
+                          </h3>
+                          <div className={classes.propertyControlsContainer}>
+                              {rowObj.buttons.map((cssValue, index) => {
+                                  let colorClass = classes.nonSelectedBtnColor;
+                                  if (playboxState[rowObj.cssProperty] === cssValue) {
+                                      colorClass = classes.selectedBtnColor;
+                                  }
+                                  const animateClass = this.props.animate ? classes.animatePropertyControl : "";
+                                  return (
+                                      <div style={{ position: 'relative' }}>
+                                          <button
+                                              className={`${classes.propertyControl} ${colorClass} ${animateClass}`}
+                                              onClick={() => {
+                                                  click(rowObj.cssProperty, cssValue);
+                                                  onSelection(cssValue);
+                                              }}
+                                              style={{ animationDelay: `${index * 50 + 100}ms` }}
+                                          >
+                                              {cssValue}
+                                          </button>
+                                      </div>
+                                  );
+                              })}
+                          </div>
+                      </div>
+                  );
+              })}
+          </div>
+      );
+    }
 };
 
-export default Controls;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSelection: (selection) => dispatch({ type: selection }),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Controls);
