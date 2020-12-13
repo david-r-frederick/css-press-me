@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classes from './Controls.module.css';
+import InputButton from '../Common/InputButton/InputButton';
+import classes from './AnimationControls.module.css';
 
-class Controls extends Component {
+class AnimationControls extends Component {
     render() {
-        const { data, playboxState, click, onSelection } = this.props;
-        let longestSubtitleLength = Math.max(
+        const { data, click, onSelection } = this.props;
+        const longestSubtitleLength = Math.max(
             ...data.map((obj) => {
                 return obj !== null ? obj.subtitle.length : 0;
             })
@@ -25,24 +26,17 @@ class Controls extends Component {
                                 {rowObj.subtitle}
                             </h3>
                             <div className={classes.propertyControlsContainer}>
-                                {rowObj.buttons.map((cssValue, index) => {
-                                    let colorClass = classes.nonSelectedBtnColor;
-                                    if (playboxState[rowObj.cssProperty] === cssValue) {
-                                        colorClass = classes.selectedBtnColor;
-                                    }
-                                    const animateClass = this.props.animate ? classes.animatePropertyControl : '';
+                                {rowObj.buttons.map((cssKey, index) => {
                                     return (
                                         <div style={{ position: 'relative' }}>
-                                            <button
-                                                className={`${classes.propertyControl} ${colorClass} ${animateClass}`}
-                                                onClick={() => {
-                                                    click(rowObj.cssProperty, cssValue);
-                                                    onSelection(cssValue);
+                                            <InputButton
+                                                cssKey={cssKey}
+                                                index={index}
+                                                onSubmit={(value) => {
+                                                    click(rowObj.cssProperty, { [cssKey]: parseFloat(value) });
+                                                    onSelection(cssKey);
                                                 }}
-                                                style={{ animationDelay: `${index * 50 + 100}ms` }}
-                                            >
-                                                {cssValue}
-                                            </button>
+                                            />
                                         </div>
                                     );
                                 })}
@@ -61,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Controls);
+export default connect(null, mapDispatchToProps)(AnimationControls);

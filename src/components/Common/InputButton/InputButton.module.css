@@ -1,0 +1,18 @@
+.button {
+  background-color: var(--color-primary);
+  color: white;
+  margin-left: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.input {
+  width: 6ch;
+  margin-left: 0.5rem;
+  display: none;
+}

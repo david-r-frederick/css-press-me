@@ -8,6 +8,11 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import activeSelectionReducer from './reducers/activeSelectionReducer';
 import tipsReducer from './reducers/tipsReducer';
+import firebase from 'firebase';
+import { firebaseConfig } from './firebaseConfig';
+
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 const rootReducer = combineReducers({
     activeSelection: activeSelectionReducer,
