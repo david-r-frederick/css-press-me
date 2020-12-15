@@ -4,6 +4,10 @@ import InputButton from '../Common/InputButton/InputButton';
 import classes from './AnimationControls.module.css';
 
 class AnimationControls extends Component {
+    state = {
+        selectedButton: '',
+    };
+
     render() {
         const { data, click, onSelection } = this.props;
         const longestSubtitleLength = Math.max(
@@ -13,7 +17,7 @@ class AnimationControls extends Component {
         );
         return (
             <div className={classes.rowsContainer}>
-                {data.map((rowObj) => {
+                {data.map((rowObj, rowIndex) => {
                     if (!rowObj) {
                         return null;
                     }
@@ -26,12 +30,16 @@ class AnimationControls extends Component {
                                 {rowObj.subtitle}
                             </h3>
                             <div className={classes.propertyControlsContainer}>
-                                {rowObj.buttons.map((cssKey, index) => {
+                                {rowObj.buttons.map((cssKey, columnIndex) => {
                                     return (
-                                        <div style={{ position: 'relative' }}>
+                                        <div style={{ position: 'relative', marginBottom: '0.8rem' }}>
                                             <InputButton
                                                 cssKey={cssKey}
-                                                index={index}
+                                                index={columnIndex}
+                                                onSelect={() =>
+                                                    this.setState({ selectedButton: `${columnIndex}:${rowIndex}` })
+                                                }
+                                                selected={this.state.selectedButton === `${columnIndex}:${rowIndex}`}
                                                 onSubmit={(value) => {
                                                     click(rowObj.cssProperty, { [cssKey]: parseFloat(value) });
                                                     onSelection(cssKey);
