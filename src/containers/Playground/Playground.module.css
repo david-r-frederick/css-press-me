@@ -1,4 +1,5 @@
 .bodyContainer {
+    transition: margin-left 500ms ease;
     margin-left: 15rem;
     margin-right: 5rem;
     padding: 1rem;
@@ -9,7 +10,7 @@
 .showTipsSwitch {
     position: absolute;
     right: 1rem;
-    top: 1rem;
+    top: 1.5rem;
     width: 60px;
     height: 34px;
     z-index: 7900;
@@ -25,7 +26,7 @@
 
 .showTipsText {
   position: absolute;
-  top: 1.5rem;
+  top: 2rem;
   right: 5.5rem;
 }
 
@@ -57,4 +58,12 @@
     border-radius: 50%;
     background-color: rgb(243, 243, 243);
     transition: transform 150ms ease-in;
+}
+
+@media (max-width: 1143px) {
+  .bodyContainer {
+    transition: margin-left 500ms ease;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 }

@@ -45,7 +45,7 @@ export class FlexBox extends Component {
                 <PageTitle title="FlexBox" />
                 <div className={classes.top}>
                     <div className={classes.playboxControlsContainer}>
-                        <h3>PlayBox Controls</h3>
+                        <h3 className={classes.firstSubheading}>PlayBox Controls</h3>
                         <Controls
                             playboxState={this.state.playBoxStyle}
                             click={(key, value) => this.setCSSProp('playBoxStyle', key, value)}
@@ -97,7 +97,7 @@ export class FlexBox extends Component {
                     <Tips rows={6} />
                 </div>
                 <div className={classes.blockControlsContainer}>
-                    <div>
+                    <div style={{ flex: 3 }}>
                         <h3>All Blocks Controls</h3>
                         <Controls
                             playboxState={this.state.blockStyle}
@@ -117,7 +117,7 @@ export class FlexBox extends Component {
                             ]}
                         />
                     </div>
-                    <div>
+                    <div style={{ flex: 5 }}>
                         <h3>Block One Controls</h3>
                         <Controls
                             playboxState={this.state.blockOneStyle}
@@ -133,6 +133,16 @@ export class FlexBox extends Component {
                                     subtitle: 'Flex Shrink',
                                     cssProperty: 'flexShrink',
                                     buttons: ['0', '1', '2', '3', '4', '5'],
+                                },
+                                {
+                                    subtitle: 'Flex Grow',
+                                    cssProperty: 'flexGrow',
+                                    buttons: ['0', '1', '2', '3', '4', '5'],
+                                },
+                                {
+                                    subtitle: 'Flex Basis',
+                                    cssProperty: 'flexBasis',
+                                    buttons: ['0', '1rem', '2rem', '3rem', '4rem', '5rem'],
                                 },
                             ]}
                         />

@@ -371,13 +371,16 @@ const initialState = {
 };
 
 const activeSelectionReducer = (state = initialState, action) => {
-    if (code[action.type]) {
-        return {
-            ...state,
-            ...code[action.type],
-        };
-    }
-    return { ...state };
+    let returnObject = { ...state };
+    Object.keys(code).forEach((k) => {
+        if (action.type.includes(k)) {
+            returnObject = {
+                ...code[k],
+            };
+        }
+    });
+
+    return returnObject;
 };
 
 export default activeSelectionReducer;

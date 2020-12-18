@@ -7,6 +7,10 @@
     justify-content: flex-start;
 }
 
+.firstSubheading {
+  margin-top: 0;
+}
+
 .block {
     background-color: black;
     color: white;
@@ -24,7 +28,6 @@ h3 {
 .blockControlsContainer {
   display: flex;
   width: 100%;
-  margin: 0 auto;
 }
 
 .playboxControlsContainer {

@@ -2,23 +2,31 @@
     box-sizing: border-box;
     vertical-align: top;
     margin-bottom: 1rem;
-    margin-left: 1rem;
     background-color: rgb(49, 49, 49);
     color: white;
     border-radius: 3px;
     overflow-y: scroll;
-    transition: flex 700ms, padding 400ms 0ms;
+    transition: flex 700ms, padding 400ms 0ms, margin 200ms 0ms;
     padding-top: 1rem;
     padding-bottom: 1rem;
-
 }
 
-.addHeight {
+.show {
     animation: add-height 500ms forwards;
+    flex: 2;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: 3px solid black;
+    margin-left: 2rem;
 }
 
-.removeHeight {
+.hide {
     animation: remove-height 500ms forwards;
+    flex: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    margin-left: 0;
 }
 
 @keyframes add-height {

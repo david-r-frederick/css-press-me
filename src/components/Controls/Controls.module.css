@@ -1,6 +1,7 @@
 .rowsContainer {
     display: flex;
     flex-direction: column;
+    flex-basis: 50%;
 }
 
 .row {
@@ -40,6 +41,7 @@
     font-weight: 600;
     font-size: 16px;
     text-transform: capitalize;
+    transition: all 250ms;
 }
 
 .animatePropertyControl {
@@ -80,4 +82,17 @@
 
 .selectedBtnColor {
     background-color: black;
+}
+
+@media (max-width: 983px) {
+  .propertyTitle {
+    margin-bottom: 0.25rem;
+  }
+  .propertyControl {
+    transition: all 250ms;
+    margin-bottom: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 14px;
+    font-weight: 400;
+  }
 }

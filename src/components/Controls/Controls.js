@@ -3,6 +3,23 @@ import { connect } from 'react-redux';
 import classes from './Controls.module.css';
 
 class Controls extends Component {
+    state = {
+        animate: true,
+    };
+
+    componentDidMount() {
+        if (window.sessionStorage.getItem('firstLoadComplete') === null) {
+            this.setState({
+                animate: true,
+            });
+            window.sessionStorage.setItem('firstLoadComplete', '1');
+        } else {
+            this.setState({
+                animate: false,
+            });
+        }
+    }
+
     render() {
         const { data, playboxState, click, onSelection } = this.props;
         let longestSubtitleLength = Math.max(
@@ -19,7 +36,7 @@ class Controls extends Component {
                     return (
                         <div className={classes.row}>
                             <h3
-                                style={{ width: `calc(${longestSubtitleLength}rem / 2 + 12px)` }}
+                                style={{ flex: `0 0 calc(${longestSubtitleLength / 2}rem + 1rem)` }}
                                 className={classes.propertyTitle}
                             >
                                 {rowObj.subtitle}
@@ -37,9 +54,17 @@ class Controls extends Component {
                                                 className={`${classes.propertyControl} ${colorClass} ${animateClass}`}
                                                 onClick={() => {
                                                     click(rowObj.cssProperty, cssValue);
-                                                    onSelection(cssValue);
+                                                    if (cssValue.match(/[0-9]/)) {
+                                                        onSelection(rowObj.cssProperty);
+                                                    } else {
+                                                        onSelection(cssValue);
+                                                    }
                                                 }}
-                                                style={{ animationDelay: `${index * 50 + 100}ms` }}
+                                                style={
+                                                    this.state.animate
+                                                        ? { animationDelay: `${index * 50}ms` }
+                                                        : { animation: 'none', opacity: '1', transform: 'scale(1)' }
+                                                }
                                             >
                                                 {cssValue}
                                             </button>

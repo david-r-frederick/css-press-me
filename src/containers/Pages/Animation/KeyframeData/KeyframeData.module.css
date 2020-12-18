@@ -1,0 +1,15 @@
+.keyframeDataContainer {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.keyframeListContainer {
+    width: 20%;
+}
+
+.keyframeList {
+    list-style: none;
+    padding-left: 1.5rem;
+}

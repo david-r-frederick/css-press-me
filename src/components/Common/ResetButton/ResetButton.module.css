@@ -1,0 +1,19 @@
+.resetButton {
+    background-color: white;
+    color: black;
+    margin-left: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 200ms, color 200ms;
+}
+
+.resetButton:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}

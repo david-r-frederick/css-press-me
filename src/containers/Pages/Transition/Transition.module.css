@@ -29,7 +29,7 @@
     cursor: pointer;
     white-space: nowrap;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .startBtn {
@@ -54,7 +54,6 @@
 .startBtn:hover,
 .startBtn:focus {
     background-color: rgb(200, 0, 0);
-    outline: none;
 }
 
 .startBtn:disabled {
@@ -83,7 +82,7 @@
     border: 2px solid black;
     padding: 0.5rem 1.25rem;
     font-size: 1rem;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     margin: 0 3px;
 }
 

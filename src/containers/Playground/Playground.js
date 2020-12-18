@@ -9,8 +9,9 @@ import './playgroundAnimation.css';
 
 class Playground extends Component {
     render() {
+        const { showTips, onToggleTips, location } = this.props;
         return (
-            <div className={`${classes.playground} page`}>
+            <div>
                 <SideMenu
                     items={[
                         { title: 'Flexbox', path: '/playbox/flexbox' },
@@ -19,19 +20,15 @@ class Playground extends Component {
                         { title: 'Animation', path: '/playbox/animation' },
                     ]}
                 />
-                <div className={`${classes.bodyContainer}`}>
+                <div className={classes.bodyContainer}>
                     <span className={classes.showTipsText}>Show Tips?</span>
                     <label className={classes.showTipsSwitch}>
-                        <input checked={this.props.showTips} type="checkbox" onChange={this.props.onToggleTips} />
+                        <input checked={showTips} type="checkbox" onChange={onToggleTips} />
                         <span className={`${classes.slider} ${classes.round}`}></span>
                     </label>
                     <TransitionGroup>
-                        <CSSTransition
-                            key={this.props.location.key}
-                            timeout={{ enter: 100, exit: 100 }}
-                            classNames="fade"
-                        >
-                            <Switch location={this.props.location}>
+                        <CSSTransition key={location.key} timeout={{ enter: 0, exit: 0 }} classNames="fade">
+                            <Switch location={location}>
                                 <Route component={FlexBox} path="/playbox/flexbox" />
                                 <Route component={Visibility} path="/playbox/visibility" />
                                 <Route component={Animation} path="/playbox/animation" />

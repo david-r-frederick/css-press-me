@@ -1,57 +1,121 @@
 .SideMenu {
-  position: fixed;
-  top: 5rem;
-  width: 12rem;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  list-style: none;
-  animation: move-right 1000ms forwards;
-  z-index: 8000;
+    position: fixed;
+    top: 5.5rem;
+    width: 12rem;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    list-style: none;
+    z-index: 8000;
+    transition: transform 500ms ease;
+    animation: move-right 1000ms forwards;
 }
 
 @keyframes move-right {
-  0% {
-    transform: translateX(-100%);
-  }
+    0% {
+        transform: translateX(-110%);
+    }
+    100% {
+        transform: translateX(1rem);
+    }
+}
 
-  100% {
-    transform: translateX(1rem);
-  }
+@keyframes move-left {
+    0% {
+        transform: translateX(1rem);
+    }
+    100% {
+        transform: translateX(-110%);
+    }
 }
 
 .SideMenuItem {
-  position: relative;
-  font-weight: bold;
-  font-size: 1.25rem;
-  height: 4rem;
-  width: 100%;
-  cursor: pointer;
+    position: relative;
+    font-weight: bold;
+    font-size: 1.25rem;
+    height: 4rem;
+    width: 100%;
+    cursor: pointer;
 }
 
 .SideMenuItem::after {
-  content: "";
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-primary);
-  z-index: -1;
-  transition: opacity 200ms;
+    content: '';
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary);
+    transition: opacity 200ms;
+    z-index: -1;
 }
 
 .SideMenuItem:hover::after,
 .SideMenuItem:focus::after {
-  opacity: 1;
+    opacity: 1;
 }
 
 .SideMenuItemLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.toggler {
+    position: fixed;
+    top: 0.5rem;
+    left: 14rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9000;
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+.hamburger {
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    background-color: #ccc;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    background-color: #ccc;
+    width: 100%;
+    height: 1px;
+    left: 0;
+}
+
+.hamburger::before {
+    top: -6px;
+}
+
+.hamburger::after {
+    top: 6px;
+}
+
+.right {
+    animation: move-right 1000ms forwards !important;
+}
+
+@media (max-width: 1143px) {
+    .SideMenu {
+        animation: move-left 1000ms forwards;
+    }
+
+    .toggler {
+        opacity: 1;
+    }
 }

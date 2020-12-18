@@ -4,6 +4,8 @@ import classes from './Transition.module.css';
 import PlayBox from '../../../components/PlayBox/PlayBox';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import Tips from '../../../components/Tips/Tips';
+import PrimaryButton from '../../../components/Common/PrimaryButton/PrimaryButton';
+import ResetButton from '../../../components/Common/ResetButton/ResetButton';
 
 export class Transition extends Component {
     state = {
@@ -105,14 +107,9 @@ export class Transition extends Component {
                                         this.setState({ unit: e.target.value });
                                     }}
                                 >
-                                    <option>px</option>
-                                    <option>rem</option>
-                                    <option>%</option>
-                                    <option>vh</option>
-                                    <option>vw</option>
-                                    <option>deg</option>
-                                    <option>ch</option>
-                                    <option>none</option>
+                                    {['px', 'rem', '%', 'vh', 'vw', 'deg', 'ch', 'none'].map((u) => {
+                                        return <option>{u}</option>;
+                                    })}
                                 </select>
                             </div>
                             <div className={classes.startInputContainer}>
@@ -140,8 +137,8 @@ export class Transition extends Component {
                                 />
                                 <label htmlFor="transition-end-value">Ending Value</label>
                             </div>
-                            <button
-                                className={classes.startBtn}
+                            <PrimaryButton
+                                title="Start Transition"
                                 onClick={() => {
                                     const previousDuration = this.state.transitionDuration;
                                     this.setState(
@@ -163,11 +160,9 @@ export class Transition extends Component {
                                         }
                                     );
                                 }}
-                            >
-                                Start transition
-                            </button>
-                            <button
-                                className={classes.resetBtn}
+                            />
+                            <ResetButton
+                                title="Reset"
                                 onClick={() => {
                                     this.setState((prevState) => {
                                         return {
@@ -176,9 +171,7 @@ export class Transition extends Component {
                                         };
                                     });
                                 }}
-                            >
-                                Reset
-                            </button>
+                            />
                         </div>
                     </div>
                     <Tips rows={4} />

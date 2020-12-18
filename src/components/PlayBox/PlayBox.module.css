@@ -7,7 +7,7 @@
   min-width: 100px;
   height: 40rem;
   min-height: 100px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 4rem;
   resize: both;
   position: relative;
@@ -20,6 +20,7 @@
   background-color: var(--color-primary);
   overflow: hidden;
   transition: width 0ms, height 0ms;
+  position: relative;
 }
 
 .resetBtn {
@@ -36,4 +37,8 @@
 
 .resetBtn:focus {
   outline: 1px solid rgba(31, 31, 31, 0.5);
+}
+
+.heightForce {
+  height: 50rem;
 }

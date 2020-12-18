@@ -5,16 +5,18 @@
   height: 100vh;
 }
 
-.first {
+.first,
+.second {
   text-align: center;
+  transform: translateY(-4rem);
+}
+
+.first {
   animation: fade-in 3000ms forwards;
-  transform: translateY(-60px);
 }
 
 .second {
-  text-align: center;
   animation: fade-in 3000ms forwards 3000ms;
-  transform: translateY(-60px);
   opacity: 0;
 }
 

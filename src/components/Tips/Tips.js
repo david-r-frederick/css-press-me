@@ -7,13 +7,9 @@ class Tips extends Component {
         return (
             <div
                 style={{
-                    flex: this.props.showTips ? '2' : '0',
-                    paddingLeft: this.props.showTips ? '1rem' : '0',
-                    paddingRight: this.props.showTips ? '1rem' : '0',
-                    border: this.props.showTips ? '3px solid black' : 'none',
                     maxHeight: this.props.rows * 52,
                 }}
-                className={`${classes.tipsContainer} ${this.props.showTips ? classes.addHeight : classes.removeHeight}`}
+                className={`${classes.tipsContainer} ${this.props.showTips ? classes.show : classes.hide}`}
             >
                 {Object.entries(this.props.activeSelection).map((entryArr) => {
                     return (
