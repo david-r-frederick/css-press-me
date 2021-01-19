@@ -3,30 +3,15 @@ import { Link } from 'react-router-dom';
 import classes from './SideMenu.module.css';
 
 class SideMenu extends Component {
-    constructor(props) {
-        super(props);
-        this.resizer = () => {
-          if (window.innerWidth < 1143) {
-            this.setState({ showSideMenu: false });
-            }
-        };
-        this.state = {
-            showSideMenu: false,
-        };
-    }
-
-    componentDidMount() {
-        window.addEventListener('resize', this.resizer);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.resizer);
-    }
+    state = {
+        showSideMenu: false,
+    };
 
     render() {
         return (
             <div>
                 <div
+                    className={classes.toggler}
                     onClick={() => {
                         this.setState((prevState) => {
                             return {
@@ -34,7 +19,6 @@ class SideMenu extends Component {
                             };
                         });
                     }}
-                    className={classes.toggler}
                 >
                     <div className={classes.hamburger}></div>
                 </div>
@@ -42,7 +26,7 @@ class SideMenu extends Component {
                     {this.props.items.map((item) => {
                         return (
                             <li className={classes.SideMenuItem}>
-                                <Link className={classes.SideMenuItemLink} to={item.path}>
+                                <Link onClick={() => this.setState({ showSideMenu: false })} className={classes.SideMenuItemLink} to={item.path}>
                                     {item.title}
                                 </Link>
                             </li>

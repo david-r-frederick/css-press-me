@@ -8,12 +8,24 @@ import Contact from './containers/Pages/Contact/Contact';
 import { Component } from 'react';
 
 class App extends Component {
+    state = {
+        input: ''
+    };
+
     render() {
         return (
             <div className="App">
                 <Route
                     render={(props) => {
-                        return props.location.pathname === '/' ? null : <NavBar />;
+                        return props.location.pathname === '/' ? null : (
+                            <NavBar
+                                navs={[
+                                    { title: 'PlayBox', path: '/playbox/flexbox' },
+                                    { title: 'About', path: '/about' },
+                                    { title: 'Contact', path: '/contact' },
+                                ]}
+                            />
+                        );
                     }}
                 />
                 <Switch>

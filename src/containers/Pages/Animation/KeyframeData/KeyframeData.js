@@ -8,12 +8,12 @@ const KeyframeData = ({ keyframesArr }) => {
                 .sort((x, y) => +x[0].replace('%', '') - +y[0].replace('%', ''))
                 .map((keyframeArr) => {
                     return (
-                        <div className={classes.keyframeListContainer}>
+                        <div key={keyframeArr[0]} className={classes.keyframeListContainer}>
                             <h4>Keyframe {keyframeArr[0]}</h4>
                             <ul className={classes.keyframeList}>
                                 {Object.entries(keyframeArr[1]).map(([cssKey, cssValue]) => {
                                     return (
-                                        <li>
+                                        <li key={cssKey}>
                                             {cssKey}: {cssValue}
                                         </li>
                                     );

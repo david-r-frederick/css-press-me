@@ -30,6 +30,14 @@
 
 .additionalControlsContainer {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.keyframeSliderLine {
+    width: 2px;
+    background-color: black;
+    height: 100%;
+    position: relative;
 }
 
 .animationDurationInput {
@@ -55,67 +63,6 @@
     flex: 7;
 }
 
-.keyframeSlider {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    top: -85px;
-    left: 0;
-    width: 0px;
-    height: calc(100% + 85px);
-    overflow: visible;
-}
-
-.keyframeSlider p {
-    text-align: center;
-}
-
-.keyframeSliderCircle {
-    position: relative;
-    clip-path: circle(40%);
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.5rem;
-    background-color: var(--color-primary);
-    cursor: pointer;
-}
-
-.keyframeSliderCircle:active {
-    cursor: grabbing;
-}
-
-.keyframeSliderCircle::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    width: 100%;
-    background-color: white;
-    clip-path: circle(40%);
-    height: 1.75rem;
-    width: 1.75rem;
-}
-
-.keyframeSliderLine {
-    width: 0;
-    height: 100%;
-    border: 1px solid black;
-    position: relative;
-}
-
-.keyframeSliderValue {
-    position: absolute;
-    top: -11px;
-    clip-path: circle(40%);
-    height: 1rem;
-    width: 1rem;
-    background-color: var(--color-primary);
-    left: -8px;
-}
-
 .cssKeySelector {
     padding: 0.5rem 1rem;
     align-self: flex-end;
@@ -125,33 +72,31 @@
     text-transform: capitalize;
 }
 
-.deleteBtn {
+.masterValueSlider {
+    position: relative;
+    flex-basis: 40px;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.masterValueSliderValue {
     position: absolute;
-    bottom: -30px;
-    border: none;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
+    clip-path: circle(40%);
     height: 1rem;
     width: 1rem;
+    top: -10px;
+    background-color: var(--color-primary);
 }
 
-.deleteBtn::before,
-.deleteBtn::after {
-    content: '';
-    background-color: white;
+.masterValueSliderLabel {
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(0, -52%);
-    width: 100%;
-    height: 1px;
+    transform: translateX(10px) rotate(90deg);
 }
 
-.deleteBtn::before {
-    transform: rotate(45deg);
-}
-
-.deleteBtn::after {
-    transform: rotate(-45deg);
+@media (max-width: 800px) {
+  .keyframesControlsContainer {
+    height: 40vw;
+  }
 }

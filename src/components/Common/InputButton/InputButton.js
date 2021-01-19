@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import classes from './InputButton.module.css';
 
 class InputButton extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            inputValue: '',
-        };
-    }
+    state = {
+        inputValue: '',
+    };
 
     render() {
         const { index, cssKey, selected, onSelect } = this.props;
@@ -28,12 +25,14 @@ class InputButton extends Component {
                     style={{ animationDelay: `${index * 50 + 100}ms` }}
                 >
                     {cssKey}
-                    {selected ? <input
-                        type="number"
-                        value={this.state.inputValue}
-                        onChange={(ev) => this.setState({ inputValue: ev.target.value })}
-                        className={classes.input}
-                    /> : null}
+                    {selected ? (
+                        <input
+                            type="number"
+                            value={this.state.inputValue}
+                            onChange={(ev) => this.setState({ inputValue: ev.target.value })}
+                            className={classes.input}
+                        />
+                    ) : null}
                 </button>
             </div>
         );

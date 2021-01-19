@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import classes from './NavBar.module.css';
 
-class NavBar extends Component {
-    render() {
-        return (
-            <div className={classes.navbarContainer}>
-                <Link style={{ textDecoration: 'none' }} to="/">
-                    <h1 className={classes.title}>CSS Press Me</h1>
-                </Link>
-                <div className={classes.navOptionsContainer}>
-                    <Link className={classes.navOption} to="/playbox/flexbox">
-                        <p className={classes.navOptionText}>PlayBox</p>
-                    </Link>
-                    <Link className={classes.navOption} to="/about">
-                        <p className={classes.navOptionText}>About</p>
-                    </Link>
-                    <Link className={classes.navOption} to="/contact">
-                        <p className={classes.navOptionText}>Contact</p>
-                    </Link>
-                </div>
+const NavBar = ({ navs }) => {
+    return (
+        <div className={classes.navbarContainer}>
+            <Link style={{ textDecoration: 'none' }} to="/">
+                <h1 className={classes.title}>CSS Press Me</h1>
+            </Link>
+            <div className={classes.navOptionsContainer}>
+                {navs.map(({ title, path }) => {
+                    return (
+                        <Link key={title} className={classes.navOption} to={path}>
+                            <p className={classes.navOptionText}>{title}</p>
+                        </Link>
+                    );
+                })}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default NavBar;

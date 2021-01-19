@@ -62,6 +62,7 @@
 
 .startStopContainer {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     margin-bottom: 1rem;
 }
@@ -103,4 +104,13 @@
 
 .top {
     display: flex;
+}
+
+.buttonsContainer {
+  padding-left: 0.8rem;
+}
+
+.inputsContainer {
+  display: flex;
+  margin-bottom: 0.5rem;
 }

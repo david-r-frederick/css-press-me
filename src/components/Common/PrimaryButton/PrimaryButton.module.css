@@ -13,7 +13,7 @@
 }
 
 .primaryButton:hover {
-    background-color: rgb(200, 0, 0);
+    background-color: rgb(200, 0, 100);
 }
 
 .primaryButton:focus {

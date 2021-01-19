@@ -8,8 +8,8 @@ import classes from './Visibility.module.css';
 export class Visibility extends Component {
     state = {
         opacity: '1',
-        height: '6rem',
-        width: '4rem',
+        height: '4rem',
+        width: '6rem',
         margin: '8px',
         marginTop: '8px',
         display: 'inline-block',
@@ -22,7 +22,7 @@ export class Visibility extends Component {
                 <div>
                     <PageTitle title="Visibility" />
                     <div className={classes.top}>
-                        <div style={{ display: 'flex', justifyContent: 'space-evenly', flex: '7' }}>
+                        <div className={classes.controlsContainer}>
                             <Controls
                                 playboxState={this.state}
                                 click={(key, value) => {
@@ -30,16 +30,17 @@ export class Visibility extends Component {
                                         [key]: value,
                                     });
                                 }}
+                                useSelect={this.props.windowWidth <= 900}
                                 data={[
                                     {
                                         subtitle: 'Height',
                                         cssProperty: 'height',
-                                        buttons: ['6rem', '0', '25%', '50%', '75%', '100%'],
+                                        buttons: ['4rem', '0', '25%', '50%', '75%', '100%'],
                                     },
                                     {
                                         subtitle: 'Width',
                                         cssProperty: 'width',
-                                        buttons: ['4rem', '0', '25%', '50%', '75%', '100%'],
+                                        buttons: ['6rem', '0', '25%', '50%', '75%', '100%'],
                                     },
                                     {
                                         subtitle: 'Margin',
@@ -60,6 +61,7 @@ export class Visibility extends Component {
                                         [key]: value,
                                     });
                                 }}
+                                useSelect={this.props.windowWidth <= 900}
                                 data={[
                                     {
                                         subtitle: 'Opacity',
@@ -83,7 +85,7 @@ export class Visibility extends Component {
                     </div>
                 </div>
                 <PlayBox>
-                    <div style={this.state} className={classes.block}></div>
+                    <div style={this.state} className={classes.block}>Edit</div>
                     <div className={classes.compareBlock}>Compare</div>
                 </PlayBox>
             </div>

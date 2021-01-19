@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import classes from './Tips.module.css';
 
-class Tips extends Component {
-    render() {
-        return (
-            <div
-                style={{
-                    maxHeight: this.props.rows * 52,
-                }}
-                className={`${classes.tipsContainer} ${this.props.showTips ? classes.show : classes.hide}`}
-            >
-                {Object.entries(this.props.activeSelection).map((entryArr) => {
-                    return (
-                        <div className={classes.tip}>
-                            <h4 className={classes.selectionHeader}>{entryArr[0]}</h4>&nbsp;
-                            {typeof entryArr[1] !== 'string' ? (
-                                <ul>
-                                    {entryArr[1].map((item) => {
-                                        return <li>{item}</li>;
-                                    })}
-                                </ul>
-                            ) : (
-                                <p style={entryArr[1].includes(' ') ? null : { wordBreak: 'break-all' }}>
-                                    {entryArr[1]}
-                                </p>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    }
-}
+const Tips = ({ rows, showTips, activeSelection }) => {
+    return (
+        <div
+            style={{
+                maxHeight: rows * 52,
+            }}
+            className={`${classes.tipsContainer} ${showTips ? classes.show : classes.hide}`}
+        >
+            {Object.entries(activeSelection).map((entryArr) => {
+                const [label, data] = entryArr;
+                return (
+                    <div className={classes.tip}>
+                        <h4 className={classes.selectionHeader}>{label}</h4>&nbsp;
+                        {typeof data === 'string' ? (
+                            <p style={data.includes(' ') ? null : { wordBreak: 'break-all' }}>{data}</p>
+                        ) : (
+                            <ul>
+                                {data.map((item) => (
+                                    <li>{item}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
 
 const mapStateToProps = ({ activeSelection, showTips }) => {
     return {

@@ -23,8 +23,7 @@ export class FlexBox extends Component {
         blockStyle: {
             width: '4rem',
             height: '4rem',
-        },
-        animateControls: true,
+        }
     };
 
     setCSSProp = (element, key, value) => {
@@ -49,7 +48,8 @@ export class FlexBox extends Component {
                         <Controls
                             playboxState={this.state.playBoxStyle}
                             click={(key, value) => this.setCSSProp('playBoxStyle', key, value)}
-                            animate={this.state.animateControls}
+                            useSelect={this.props.windowWidth <= 740}
+                            animate={true}
                             data={[
                                 {
                                     subtitle: 'Flex-Direction Properties',
@@ -94,7 +94,7 @@ export class FlexBox extends Component {
                             ]}
                         />
                     </div>
-                    <Tips rows={6} />
+                    <Tips rows={5} />
                 </div>
                 <div className={classes.blockControlsContainer}>
                     <div style={{ flex: 3 }}>
@@ -102,7 +102,8 @@ export class FlexBox extends Component {
                         <Controls
                             playboxState={this.state.blockStyle}
                             click={(key, value) => this.setCSSProp('blockStyle', key, value)}
-                            animate={this.state.animateControls}
+                            animate={true}
+                            useSelect={this.props.windowWidth <= 800}
                             data={[
                                 {
                                     subtitle: 'Width',
@@ -122,7 +123,8 @@ export class FlexBox extends Component {
                         <Controls
                             playboxState={this.state.blockOneStyle}
                             click={(key, value) => this.setCSSProp('blockOneStyle', key, value)}
-                            animate={this.state.animateControls}
+                            animate={true}
+                            useSelect={this.props.windowWidth <= 800}
                             data={[
                                 {
                                     subtitle: 'Align-Self',

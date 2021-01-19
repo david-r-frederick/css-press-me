@@ -9,11 +9,20 @@ import { SizeMe } from 'react-sizeme';
 import ResetButton from '../../../components/Common/ResetButton/ResetButton';
 import PrimaryButton from '../../../components/Common/PrimaryButton/PrimaryButton';
 import KeyframeData from './KeyframeData/KeyframeData';
+import KeyframeSlider from './KeyframeSlider/KeyframeSlider';
 
 export class Animation extends Component {
     constructor(props) {
         super(props);
-        this.starterCSS = { opacity: '1', left: '0px', top: '0px', margin: '0px', padding: '0px', 'font-size': '12px', 'border-radius': '0px' };
+        this.starterCSS = {
+            opacity: '1',
+            left: '0px',
+            top: '0px',
+            margin: '0px',
+            padding: '0px',
+            'font-size': '12px',
+            'border-radius': '0px',
+        };
         this.initialKeyframes = {
             '0%': { ...this.starterCSS },
             '25%': { ...this.starterCSS },
@@ -22,17 +31,47 @@ export class Animation extends Component {
             '100%': { ...this.starterCSS },
         };
         this.state = {
-            slidersDisabled: false,
             animationDuration: 3000,
             cssKey: 'top',
+            sliderHeight: 400,
             keyframes: {
                 ...this.initialKeyframes,
             },
         };
     }
 
+    createKeyframe = (keyframesArr) => {
+        if (keyframesArr.length < 10) {
+            let newKeyframe;
+            do {
+                newKeyframe = `${Math.round(Math.random() * 100)}%`;
+            } while (this.state.keyframes[newKeyframe]);
+            const keyframesCopy = { ...this.state.keyframes, [newKeyframe]: { ...this.starterCSS } };
+            this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    keyframes: Object.keys(keyframesCopy)
+                        .map((el) => +el.replace('%', ''))
+                        .sort((a, b) => a - b)
+                        .reduce((cur, acc) => {
+                            return {
+                                ...cur,
+                                [`${acc}%`]: keyframesCopy[`${acc}%`],
+                            };
+                        }, {}),
+                };
+            });
+        }
+    };
+
+    deleteKeyframe = (keyframes, percent) => {
+        const newObject = { ...keyframes };
+        delete newObject[percent];
+        this.setState({ keyframes: newObject });
+    };
+
     render() {
-        const { keyframes, slidersDisabled, cssKey } = this.state;
+        const { keyframes, cssKey, sliderHeight, animationDuration } = this.state;
         const keyframesArr = Object.entries(keyframes);
         const cssKeys = Object.keys(this.starterCSS);
 
@@ -49,12 +88,16 @@ export class Animation extends Component {
                         <SizeMe monitorHeight>
                             {({ size }) => {
                                 const { width, height } = size;
+                                if (sliderHeight !== height) {
+                                    this.setState({ sliderHeight: height });
+                                }
                                 return (
                                     <div className={classes.keyframesControlsContainer}>
                                         {keyframesArr.map((kframeArr) => {
-                                            const keyframeAsANumber = +kframeArr[0].replace('%', '');
+                                            const [keyframePercentage, keyframeCSS] = kframeArr;
+                                            const keyframeAsANumber = +keyframePercentage.replace('%', '');
                                             const initialX = (keyframeAsANumber * width) / 100;
-                                            const currentCSSKeyValue = kframeArr[1][this.state.cssKey];
+                                            const currentCSSKeyValue = keyframeCSS[cssKey];
                                             let initialY;
                                             if (currentCSSKeyValue.includes('px')) {
                                                 initialY = +currentCSSKeyValue.replace('px', '');
@@ -62,13 +105,14 @@ export class Animation extends Component {
                                                 initialY = +currentCSSKeyValue * 400;
                                             }
                                             return (
-                                                <Draggable
-                                                    disabled={slidersDisabled}
-                                                    axis="x"
-                                                    bounds="parent"
-                                                    position={{ x: initialX, y: 0 }}
-                                                    onDrag={(e, ui) => {
-                                                        const newKeyframePerc = `${Math.round((ui.x / width) * 100)}%`;
+                                                <KeyframeSlider
+                                                    initialPositions={{ initialX, initialY }}
+                                                    parentHeight={height}
+                                                    keyframePercentage={keyframePercentage}
+                                                    updateKeyframePercentage={(xPosition) => {
+                                                        const newKeyframePerc = `${Math.round(
+                                                            (xPosition / width) * 100
+                                                        )}%`;
                                                         const keyframeExists = keyframesArr
                                                             .map((arr) => arr[0])
                                                             .includes(newKeyframePerc);
@@ -76,10 +120,10 @@ export class Animation extends Component {
                                                             this.setState((prevState) => {
                                                                 let newObject = {};
                                                                 Object.keys(prevState.keyframes).forEach((keyframe) => {
-                                                                    if (keyframe === kframeArr[0]) {
+                                                                    if (keyframe === keyframePercentage) {
                                                                         let newPair = {
                                                                             [newKeyframePerc]:
-                                                                                prevState.keyframes[kframeArr[0]],
+                                                                                prevState.keyframes[keyframePercentage],
                                                                         };
                                                                         newObject = { ...newObject, ...newPair };
                                                                     } else {
@@ -96,82 +140,75 @@ export class Animation extends Component {
                                                             });
                                                         }
                                                     }}
-                                                >
-                                                    <div className={classes.keyframeSlider}>
-                                                        <p>{kframeArr[0]}</p>
-                                                        <div className={classes.keyframeSliderCircle}></div>
-                                                        <div className={classes.keyframeSliderLine}>
-                                                            <Draggable
-                                                                position={{ x: 0, y: initialY }}
-                                                                onDrag={(e, ui) => {
-                                                                    this.setState((prevState) => {
-                                                                        const { cssKey, keyframes } = prevState;
-                                                                        let value = ui.y;
-                                                                        let unit = 'px';
-                                                                        if (cssKey === 'opacity') {
-                                                                            value = ui.y / height;
-                                                                            unit = '';
-                                                                        }
-                                                                        return {
-                                                                            ...prevState,
-                                                                            keyframes: {
-                                                                                ...keyframes,
-                                                                                [kframeArr[0]]: {
-                                                                                    ...keyframes[kframeArr[0]],
-                                                                                    [cssKey]: `${value.toFixed(
-                                                                                        2
-                                                                                    )}${unit}`,
-                                                                                },
-                                                                            },
-                                                                        };
-                                                                    });
-                                                                }}
-                                                                bounds={{ top: 0, bottom: height }}
-                                                                axis="y"
-                                                            >
-                                                                <div
-                                                                    style={{}}
-                                                                    className={classes.keyframeSliderValue}
-                                                                    onMouseOver={() =>
-                                                                        this.setState({
-                                                                            slidersDisabled: true,
-                                                                        })
-                                                                    }
-                                                                    onMouseLeave={() =>
-                                                                        this.setState({
-                                                                            slidersDisabled: false,
-                                                                        })
-                                                                    }
-                                                                ></div>
-                                                            </Draggable>
-                                                        </div>
-                                                        <button
-                                                            onClick={() => {
-                                                                const newObject = { ...this.state.keyframes };
-                                                                delete newObject[kframeArr[0]];
-                                                                this.setState({ keyframes: newObject });
-                                                            }}
-                                                            className={classes.deleteBtn}
-                                                        ></button>
-                                                    </div>
-                                                </Draggable>
+                                                    updateKeyframeCSSValue={(yPosition) => {
+                                                        this.setState((prevState) => {
+                                                            const { cssKey, keyframes } = prevState;
+                                                            let value = yPosition;
+                                                            let unit = 'px';
+                                                            if (cssKey === 'opacity') {
+                                                                value = yPosition / height;
+                                                                unit = '';
+                                                            }
+                                                            return {
+                                                                ...prevState,
+                                                                keyframes: {
+                                                                    ...keyframes,
+                                                                    [keyframePercentage]: {
+                                                                        ...keyframes[keyframePercentage],
+                                                                        [cssKey]: `${value.toFixed(2)}${unit}`,
+                                                                    },
+                                                                },
+                                                            };
+                                                        });
+                                                    }}
+                                                    deleteKeyframe={() => {
+                                                        this.deleteKeyframe(keyframes, keyframePercentage);
+                                                    }}
+                                                />
                                             );
                                         })}
                                         <select
                                             className={classes.cssKeySelector}
                                             value={cssKey}
-                                            onChange={(event) => {
-                                                this.setState({ cssKey: event.target.value });
-                                            }}
+                                            onChange={(ev) => this.setState({ cssKey: ev.target.value })}
                                         >
                                             {cssKeys.map((cssKey) => {
-                                                return <option>{cssKey}</option>;
+                                                return <option key={cssKey}>{cssKey}</option>;
                                             })}
                                         </select>
                                     </div>
                                 );
                             }}
                         </SizeMe>
+                        <div className={classes.masterValueSlider}>
+                            <h3 className={classes.masterValueSliderLabel}>MASTER</h3>
+                            <div className={classes.keyframeSliderLine}></div>
+                            <Draggable
+                                bounds={{ top: 0, bottom: sliderHeight }}
+                                axis="y"
+                                onDrag={(e, ui) => {
+                                    this.setState((prevState) => {
+                                        const newObject = {};
+                                        let value = ui.y;
+                                        let unit = 'px';
+                                        if (cssKey === 'opacity') {
+                                            value = ui.y / sliderHeight;
+                                            unit = '';
+                                        }
+                                        for (const keyframe in prevState.keyframes) {
+                                            newObject[keyframe] = prevState.keyframes[keyframe];
+                                            newObject[keyframe][prevState.cssKey] = `${value}${unit}`;
+                                        }
+                                        return {
+                                            ...prevState,
+                                            keyframes: newObject,
+                                        };
+                                    });
+                                }}
+                            >
+                                <div className={classes.masterValueSliderValue}></div>
+                            </Draggable>
+                        </div>
                         <Tips rows={10} />
                     </div>
                     <KeyframeData keyframesArr={keyframesArr} />
@@ -182,37 +219,14 @@ export class Animation extends Component {
                         <input
                             className={classes.animationDurationInput}
                             type="number"
-                            value={this.state.animationDuration}
+                            value={animationDuration}
                             id="animation-duration-input"
                             onChange={(ev) => {
                                 this.setState({ animationDuration: +ev.target.value });
                             }}
                         />
                         <PrimaryButton
-                            onClick={() => {
-                                if (keyframesArr.length >= 10) {
-                                    return;
-                                }
-                                const existingKeyframes = keyframesArr.map((arr) => arr[0]);
-                                let newKeyframe;
-                                do {
-                                  newKeyframe = `${Math.round(Math.random() * 100)}%`;
-                                } while (existingKeyframes.includes(newKeyframe));
-                                keyframesArr.push([newKeyframe, { ...this.starterCSS }]);
-                                keyframesArr.sort((x, y) => {
-                                    return parseInt(x[0].replace('%', '')) - parseInt(y[0].replace('%', ''));
-                                });
-                                const keyframesObjectToAssign = {};
-                                keyframesArr.forEach((subArr) => {
-                                    keyframesObjectToAssign[subArr[0]] = subArr[1];
-                                });
-                                this.setState((prevState) => {
-                                    return {
-                                        ...prevState,
-                                        keyframes: keyframesObjectToAssign,
-                                    };
-                                });
-                            }}
+                            onClick={() => this.createKeyframe(keyframesArr)}
                             className={classes.addKeyframeBtn}
                             title="Add Keyframe"
                         />
@@ -227,7 +241,7 @@ export class Animation extends Component {
                     </div>
                     <PlayBox>
                         <div
-                            style={{ animation: `flexible ${this.state.animationDuration}ms infinite` }}
+                            style={{ animation: `flexible ${animationDuration}ms infinite` }}
                             className={classes.block}
                         >
                             BOX

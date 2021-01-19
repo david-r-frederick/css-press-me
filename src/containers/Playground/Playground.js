@@ -8,9 +8,32 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './playgroundAnimation.css';
 
 class Playground extends Component {
+    constructor(props) {
+        super(props);
+        this.resizer = () => {
+            this.setState({ windowWidth: window.innerWidth });
+        };
+        this.state = {
+            windowWidth: window.innerWidth,
+        };
+    }
+
+    componentDidMount() {
+        window.addEventListener('resize', this.resizer);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resizer);
+    }
+
     render() {
         const { showTips, onToggleTips, location } = this.props;
-        return (
+        return this.state.windowWidth < 575 ? (
+            <h3 style={{ margin: '1rem 2rem' }}>
+                The site is meant to be used on a device no smaller than 575px wide. Please use a different device. We
+                apologize for the inconvenience.
+            </h3>
+        ) : (
             <div>
                 <SideMenu
                     items={[
@@ -29,10 +52,16 @@ class Playground extends Component {
                     <TransitionGroup>
                         <CSSTransition key={location.key} timeout={{ enter: 0, exit: 0 }} classNames="fade">
                             <Switch location={location}>
-                                <Route component={FlexBox} path="/playbox/flexbox" />
-                                <Route component={Visibility} path="/playbox/visibility" />
+                                <Route path="/playbox/flexbox">
+                                    {(props) => <FlexBox {...props} windowWidth={this.state.windowWidth} />}
+                                </Route>
+                                <Route path="/playbox/visibility">
+                                    {(props) => <Visibility {...props} windowWidth={this.state.windowWidth} />}
+                                </Route>
+                                <Route path="/playbox/transition">
+                                  {(props) => <Transition {...props} windowWidth={this.state.windowWidth} />}
+                                </Route>
                                 <Route component={Animation} path="/playbox/animation" />
-                                <Route component={Transition} path="/playbox/transition" />
                             </Switch>
                         </CSSTransition>
                     </TransitionGroup>

@@ -25,14 +25,10 @@ export class Transition extends Component {
 
     renderStyles = () => {
         const { current, transitionProperty, transformOption } = this.state;
-        switch (transitionProperty) {
-            case 'transform':
-                return { ...this.state, transform: `${transformOption}(${current}${this.state.unit})` };
-            case 'opacity':
-                return { ...this.state, opacity: current + this.state.unit };
-            default:
-                return { ...this.state, [transitionProperty]: current + this.state.unit };
+        if (transitionProperty === 'transform') {
+            return { ...this.state, transform: `${transformOption}(${current}${this.state.unit})` };
         }
+        return { ...this.state, [transitionProperty]: current + this.state.unit };
     };
 
     setBlockProp = (key, value) => {
@@ -76,6 +72,7 @@ export class Transition extends Component {
                         <Controls
                             playboxState={this.state}
                             click={this.setBlockProp}
+                            useSelect={this.props.windowWidth <= 685}
                             data={[
                                 {
                                     subtitle: 'Property to Transition',
@@ -96,82 +93,70 @@ export class Transition extends Component {
                             ]}
                         />
                         <div className={classes.startStopContainer}>
-                            <div className={classes.unitSelectContainer}>
-                                <select
-                                    className={classes.unitSelect}
-                                    onChange={(e) => {
-                                        if (e.target.value === 'none') {
-                                            this.setState({ unit: '' });
-                                            return;
-                                        }
-                                        this.setState({ unit: e.target.value });
-                                    }}
-                                >
-                                    {['px', 'rem', '%', 'vh', 'vw', 'deg', 'ch', 'none'].map((u) => {
-                                        return <option>{u}</option>;
-                                    })}
-                                </select>
+                            <div className={classes.inputsContainer}>
+                                <div className={classes.unitSelectContainer}>
+                                    <select
+                                        className={classes.unitSelect}
+                                        onChange={({ target }) => {
+                                            let unit = target.value === 'none' ? '' : target.value;
+                                            this.setState({ unit });
+                                        }}
+                                    >
+                                        {['px', 'rem', '%', 'vh', 'vw', 'deg', 'ch', 'none'].map((u) => {
+                                            return <option key={u}>{u}</option>;
+                                        })}
+                                    </select>
+                                </div>
+                                <div className={classes.startInputContainer}>
+                                    <input
+                                        className={classes.valueInput}
+                                        id="transition-start-value"
+                                        type="number"
+                                        value={this.state.start}
+                                        onChange={({ target }) => {
+                                            this.setState({
+                                                start: target.value,
+                                                current: target.value,
+                                            });
+                                        }}
+                                    />
+                                    <label htmlFor="transition-start-value">Starting Value</label>
+                                </div>
+                                <div className={classes.stopInputContainer}>
+                                    <input
+                                        className={classes.valueInput}
+                                        id="transition-end-value"
+                                        type="number"
+                                        value={this.state.end}
+                                        onChange={({ target }) => this.setState({ end: target.value })}
+                                    />
+                                    <label htmlFor="transition-end-value">Ending Value</label>
+                                </div>
                             </div>
-                            <div className={classes.startInputContainer}>
-                                <input
-                                    className={classes.valueInput}
-                                    id="transition-start-value"
-                                    type="number"
-                                    value={this.state.start}
-                                    onChange={(ev) => {
-                                        this.setState({
-                                            start: ev.target.value,
-                                            current: ev.target.value,
+                            <div className={classes.buttonsContainer}>
+                                <PrimaryButton
+                                    title="Start Transition"
+                                    onClick={() => {
+                                        this.setState((prevState) => {
+                                            return {
+                                                ...prevState,
+                                                current: prevState.end,
+                                            };
                                         });
                                     }}
                                 />
-                                <label htmlFor="transition-start-value">Starting Value</label>
-                            </div>
-                            <div className={classes.stopInputContainer}>
-                                <input
-                                    className={classes.valueInput}
-                                    id="transition-end-value"
-                                    type="number"
-                                    value={this.state.end}
-                                    onChange={(ev) => this.setState({ end: ev.target.value })}
-                                />
-                                <label htmlFor="transition-end-value">Ending Value</label>
-                            </div>
-                            <PrimaryButton
-                                title="Start Transition"
-                                onClick={() => {
-                                    const previousDuration = this.state.transitionDuration;
-                                    this.setState(
-                                        (prevState) => {
+                                <ResetButton
+                                    title="Reset"
+                                    onClick={() => {
+                                        this.setState((prevState) => {
                                             return {
                                                 ...prevState,
-                                                transitionDuration: '0ms',
                                                 current: prevState.start,
                                             };
-                                        },
-                                        () => {
-                                            this.setState((prevState) => {
-                                                return {
-                                                    ...prevState,
-                                                    transitionDuration: previousDuration,
-                                                    current: prevState.end,
-                                                };
-                                            });
-                                        }
-                                    );
-                                }}
-                            />
-                            <ResetButton
-                                title="Reset"
-                                onClick={() => {
-                                    this.setState((prevState) => {
-                                        return {
-                                            ...prevState,
-                                            current: prevState.start,
-                                        };
-                                    });
-                                }}
-                            />
+                                        });
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                     <Tips rows={4} />
